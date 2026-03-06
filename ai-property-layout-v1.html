@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foxfield | Rudry Road, Lisvane | Fine & Country</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #a78f51;
+    --gold-light: #b9a066;
+    --text: #333333;
+    --text-light: #666666;
+    --text-muted: #7f7f7f;
+    --border: #e5e5e5;
+    --bg-light: #f9f7f4;
+    --bg-cream: #f4f1ec;
+    --btn-gold: #a78f51;
+    --btn-hover: #8e7940;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Lato', sans-serif; background: #fff; color: var(--text); font-size: 14px; line-height: 1.6; }
+
+  /* UTILITY BAR */
+  .utility-bar { background: #f5f5f5; border-bottom: 1px solid #e8e8e8; padding: 7px 40px; display: flex; align-items: center; justify-content: flex-end; gap: 24px; font-size: 11px; color: #888; letter-spacing: 0.5px; }
+  .utility-bar a { color: #888; text-decoration: none; }
+  .utility-bar a:hover { color: var(--gold); }
+
+  /* HEADER */
+  .main-header { padding: 16px 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .fc-logo { display: flex; align-items: center; }
+
+  .main-nav { display: flex; align-items: center; gap: 28px; }
+  .main-nav a { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text); text-decoration: none; }
+  .main-nav a:hover { color: var(--gold); }
+  .btn-val-nav { background: transparent; border: 1px solid var(--gold); color: var(--gold); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 9px 16px; text-decoration: none; }
+  .btn-val-nav:hover { background: var(--gold); color: #fff; }
+
+  /* BACK */
+  .back-bar { padding: 11px 40px; border-bottom: 1px solid var(--border); }
+  .back-bar a { font-size: 12px; color: var(--text-light); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
+  .back-bar a::before { content: '‹'; font-size: 15px; }
+  .back-bar a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero { display: grid; grid-template-columns: 1fr 1fr; height: 320px; width: 100%; }
+  .hero-pane { position: relative; overflow: hidden; height: 320px; }
+  .hero-pane.left { background: linear-gradient(145deg, #3d4f3a, #2a3a28); }
+  .hero-pane.right { background: linear-gradient(145deg, #4a5f46, #374d33); border-left: 2px solid rgba(255,255,255,0.15); }
+  .hero-pane img { width: 100%; height: 100%; object-fit: cover; display: block; position: absolute; top: 0; left: 0; }
+  .hero-caption { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+  .photo-count { position: absolute; bottom: 14px; right: 16px; background: rgba(0,0,0,0.5); color: #fff; font-size: 11px; font-weight: 600; padding: 5px 10px; display: flex; align-items: center; gap: 5px; }
+
+  /* TABS */
+  .prop-tabs { border-bottom: 1px solid var(--border); padding: 0 40px; display: flex; align-items: center; background: #fff; }
+  .tab { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-light); padding: 15px 18px; border-bottom: 2px solid transparent; text-decoration: none; cursor: pointer; }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--text); border-bottom-color: var(--text); }
+  .tab-spacer { flex: 1; }
+  .tab-actions { display: flex; gap: 18px; }
+  .tab-action { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); text-decoration: none; padding: 15px 0; }
+  .tab-action:hover { color: var(--gold); }
+
+  /* TWO-COL LAYOUT */
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: 1fr 300px; gap: 44px; align-items: start; }
+
+  /* LEFT */
+  .left { min-width: 0; }
+
+  /* Title block */
+  .title-block { padding: 28px 0 22px; border-bottom: 1px solid var(--border); }
+  .title-block h1 { font-size: 21px; font-weight: 400; color: var(--text); line-height: 1.3; margin-bottom: 8px; }
+  .price { color: var(--gold); font-size: 17px; font-weight: 700; margin-bottom: 2px; }
+  .price-usd { font-size: 12px; color: var(--text-muted); margin-bottom: 10px; }
+  .prop-addr { font-size: 13px; color: var(--text-light); margin-bottom: 14px; }
+  .icons-row { display: flex; gap: 22px; margin-bottom: 12px; }
+  .p-icon { font-size: 12px; color: var(--text-light); display: flex; align-items: center; gap: 5px; }
+  .p-icon-s { font-size: 15px; }
+  .prop-ref { font-size: 11px; color: var(--text-muted); }
+
+  /* Thumbs */
+  .thumbs { display: flex; gap: 5px; padding: 14px 0; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .thumb { width: 70px; height: 52px; border: 1px solid var(--border); background: var(--bg-cream); display: flex; align-items: center; justify-content: center; font-size: 17px; cursor: pointer; flex-shrink: 0; }
+  .thumb:hover { border-color: var(--gold); }
+  .thumb-more { font-size: 11px; font-weight: 700; color: var(--text); background: #f0ede6; }
+  .thumb-fp { font-size: 9px; font-weight: 700; color: var(--text-muted); background: #f0ede6; text-align: center; padding: 4px; letter-spacing: 0.5px; line-height: 1.3; }
+
+  /* Section */
+  .sec { padding: 26px 0; border-bottom: 1px solid var(--border); }
+  .sec:last-child { border-bottom: none; }
+  .sec-title { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; }
+
+  /* Snapshot grid */
+  .snap-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; border: 1px solid var(--border); }
+  .snap-cell { padding: 13px 15px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .snap-cell:nth-child(3n) { border-right: none; }
+  .snap-cell:nth-last-child(-n+3) { border-bottom: none; }
+  .snap-k { font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 3px; }
+  .snap-v { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.3; }
+  .snap-v.gold { color: var(--gold); }
+
+  /* Description */
+  .desc p { font-size: 14px; line-height: 1.85; color: var(--text-light); margin-bottom: 13px; }
+  .desc p:first-child { color: var(--text); }
+  .desc p:last-child { margin-bottom: 0; }
+
+  /* Feature list */
+  .feat-list { list-style: none; }
+  .feat-list li { font-size: 13px; color: var(--text-light); padding: 7px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 10px; line-height: 1.4; }
+  .feat-list li:last-child { border-bottom: none; }
+  .feat-list li::before { content: ''; width: 5px; height: 5px; background: var(--gold); border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+
+  /* Info strip */
+  .info-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 0; padding: 13px 0; border-bottom: 1px solid var(--border); border-top: 1px solid var(--border); margin-top: 14px; row-gap: 10px; }
+  .info-item { display: flex; align-items: center; gap: 7px; padding: 0 16px 0 0; font-size: 13px; color: var(--text-light); border-right: 1px solid var(--border); margin-right: 16px; }
+  .info-item:last-child { border-right: none; margin-right: 0; }
+  .info-item .info-lbl { color: var(--text-muted); font-size: 12px; }
+  .info-item .info-val { font-weight: 600; color: var(--text); font-size: 13px; }
+  .badge { display: inline-block; padding: 2px 9px; border-radius: 3px; font-size: 12px; font-weight: 600; }
+  .badge-gold { border: 1px solid var(--gold); color: var(--gold); background: transparent; }
+  .badge-green { border: 1px solid #5a9a6a; color: #2a6a44; background: transparent; }
+  .badge-blue { border: 1px solid #6a8ab8; color: #2a4a7a; background: transparent; }
+  .badge-avail { border: 1px solid #5a9a6a; color: #2a6a44; background: transparent; display: inline-flex; align-items: center; gap: 5px; }
+  .badge-avail::before { content: '•'; font-size: 14px; color: #4caf70; }
+
+  /* Location categories */
+  .loc-cats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
+  .loc-cat { border: 1px solid var(--border); padding: 16px 18px; }
+  .loc-cat-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  .loc-cat-body { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+  .loc-cat-body ul { list-style: none; padding: 0; margin: 0; }
+  .loc-cat-body ul li { padding: 5px 0; border-bottom: 1px solid #f0f0f0; display: flex; align-items: flex-start; gap: 9px; font-size: 12px; }
+  .loc-cat-body ul li:last-child { border-bottom: none; padding-bottom: 0; }
+  .loc-cat-body ul li::before { content: ''; width: 5px; height: 5px; background: var(--gold); border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+
+  /* Facts row */
+  .facts { display: flex; gap: 44px; padding: 18px 0; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .fact-lbl { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 3px; }
+  .fact-v { font-size: 14px; color: var(--text); }
+
+  /* Floor grid */
+  .floor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .f-card { border: 1px solid var(--border); }
+  .f-head { background: var(--bg-cream); border-bottom: 1px solid var(--border); padding: 9px 13px; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
+  .f-head::before { content: ''; width: 3px; height: 11px; background: var(--gold); }
+  .f-body { padding: 8px 13px; }
+  .f-room { font-size: 12px; color: var(--text-light); padding: 5px 0; border-bottom: 1px solid #f0f0f0; display: flex; gap: 7px; line-height: 1.3; }
+  .f-room:last-child { border-bottom: none; }
+  .f-room::before { content: '–'; color: var(--gold); flex-shrink: 0; font-size: 11px; }
+
+  /* Map */
+  .map-box { border: 1px solid var(--border); }
+  .map-vis { background: linear-gradient(145deg, #e4ede0, #d4e4cf); height: 230px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 7px; position: relative; }
+  .map-vis::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 26px, rgba(0,0,0,0.035) 26px, rgba(0,0,0,0.035) 27px), repeating-linear-gradient(90deg, transparent, transparent 26px, rgba(0,0,0,0.035) 26px, rgba(0,0,0,0.035) 27px); }
+  .map-pin { font-size: 28px; position: relative; z-index: 1; }
+  .map-name { font-family: 'Libre Baskerville', serif; font-size: 14px; color: #2a3a28; position: relative; z-index: 1; }
+  .map-sub { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #5a6a58; position: relative; z-index: 1; }
+  .map-tabs-row { border-top: 1px solid var(--border); display: flex; background: #fff; overflow-x: auto; }
+  .m-tab { font-size: 11px; font-weight: 600; color: var(--text-muted); padding: 9px 13px; border-right: 1px solid var(--border); white-space: nowrap; cursor: pointer; flex-shrink: 0; }
+  .m-tab:hover { color: var(--gold); }
+  .m-tab.active { color: var(--text); border-bottom: 2px solid var(--text); }
+  .nearby { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+  .nb-item { border: 1px solid var(--border); padding: 11px 13px; display: flex; align-items: center; gap: 9px; }
+  .nb-dot { width: 7px; height: 7px; border-radius: 50%; background: #e05c5c; flex-shrink: 0; }
+  .nb-dot.g { background: var(--gold); }
+  .nb-dot.gr { background: #5a8a5a; }
+  .nb-name { font-size: 12px; font-weight: 600; color: var(--text); }
+  .nb-dist { font-size: 11px; color: var(--text-muted); }
+
+  /* Market */
+  .market-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .m-card { border: 1px solid var(--border); padding: 18px; }
+  .m-card h4 { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; padding-bottom: 9px; border-bottom: 1px solid var(--border); }
+  .buyer-row { font-size: 12px; color: var(--text-light); padding: 7px 0; border-bottom: 1px solid #f0f0f0; display: flex; gap: 7px; line-height: 1.4; }
+  .buyer-row:last-of-type { border-bottom: none; }
+  .buyer-row::before { content: '›'; color: var(--gold); flex-shrink: 0; font-size: 13px; }
+  .demand-pill { display: inline-flex; align-items: center; gap: 6px; background: #f0faf4; border: 1px solid #b8dfc8; padding: 5px 11px; margin-top: 12px; }
+  .d-dot { width: 7px; height: 7px; background: #4caf70; border-radius: 50%; animation: blink 2s infinite; }
+  @keyframes blink { 0%,100%{opacity:1;}50%{opacity:0.3;} }
+  .d-text { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #2a6a44; }
+
+  /* FAQ */
+  .faq-row { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  .faq-row:first-child { padding-top: 0; }
+  .faq-row:last-child { border-bottom: none; }
+  .fq-row { display: flex; gap: 12px; }
+  .fq-num { font-size: 11px; font-weight: 700; color: var(--gold); flex-shrink: 0; min-width: 20px; margin-top: 1px; }
+  .fq-q { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 5px; line-height: 1.4; }
+  .fq-a { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+
+  /* RIGHT SIDEBAR */
+  .right { padding-top: 28px; align-self: start; position: sticky; top: 24px; }
+  .agent-card { border: 1px solid var(--border); margin-bottom: 18px; }
+  .ac-head { padding: 14px 16px; border-bottom: 1px solid var(--border); }
+  .ac-head p { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+  .ac-head span { font-size: 11px; color: var(--text-muted); }
+  .ac-body { padding: 13px 16px; }
+  .btn-book { display: block; background: var(--btn-gold); color: #fff; text-align: center; padding: 13px; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; margin-bottom: 7px; border: none; cursor: pointer; width: 100%; }
+  .btn-book:hover { background: var(--btn-hover); }
+  .btn-call { display: flex; align-items: center; justify-content: center; gap: 7px; background: #fff; color: var(--text); border: 1px solid var(--border); padding: 11px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; margin-bottom: 7px; cursor: pointer; width: 100%; }
+  .btn-call:hover { border-color: var(--gold); color: var(--gold); }
+  .btn-cb { display: flex; align-items: center; justify-content: center; gap: 7px; background: #fff; color: var(--text-muted); border: 1px solid var(--border); padding: 10px; font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; cursor: pointer; width: 100%; }
+  .btn-cb:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* Sidebar snapshot */
+  .sb-snap { border: 1px solid var(--border); margin-bottom: 18px; }
+  .sb-head { padding: 10px 14px; background: var(--bg-cream); border-bottom: 1px solid var(--border); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); }
+  .sb-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-bottom: 1px solid #f0f0f0; font-size: 12px; }
+  .sb-row:last-child { border-bottom: none; }
+  .sb-k { color: var(--text-muted); }
+  .sb-v { font-weight: 600; color: var(--text); text-align: right; }
+  .sb-v.gold { color: var(--gold); }
+  .sb-v.avail { color: #2a6a44; }
+
+  /* FAQ accordion */
+  .faq-row { border-bottom: 1px solid var(--border); }
+  .faq-row:last-child { border-bottom: none; }
+  .fq-trigger { display: flex; align-items: center; gap: 12px; padding: 10px 0; cursor: pointer; user-select: none; }
+  .fq-trigger:hover .fq-q { color: var(--gold); }
+  .fq-num { font-size: 11px; font-weight: 700; color: var(--gold); flex-shrink: 0; min-width: 20px; }
+  .fq-q { font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.4; flex: 1; }
+  .fq-chevron { font-size: 11px; color: var(--text-muted); flex-shrink: 0; transition: transform 0.25s; }
+  .faq-row.open .fq-chevron { transform: rotate(180deg); }
+  .fq-a { font-size: 13px; color: var(--text-light); line-height: 1.6; padding: 0 0 10px 32px; display: none; }
+  .faq-row.open .fq-a { display: block; }
+
+  /* Calc dropdown */
+  .calc-stub { border: 1px solid var(--border); margin-bottom: 7px; border-radius: 2px; }
+  .cs-head { padding: 13px 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; font-size: 12px; font-weight: 600; color: var(--text); user-select: none; }
+  .cs-head:hover { color: var(--gold); }
+  .cs-icon { font-size: 11px; color: var(--text-muted); transition: transform 0.25s; }
+  .calc-stub.open .cs-icon { transform: rotate(180deg); }
+  .cs-body { display: none; padding: 14px 16px; border-top: 1px solid var(--border); background: var(--bg-cream); }
+  .calc-stub.open .cs-body { display: block; }
+  .cs-field { margin-bottom: 10px; }
+  .cs-field label { display: block; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+  .cs-field input, .cs-field select { width: 100%; border: 1px solid var(--border); padding: 8px 10px; font-size: 12px; font-family: inherit; color: var(--text); background: #fff; }
+  .cs-result { background: var(--btn-gold); color: #fff; padding: 10px 14px; font-size: 13px; font-weight: 700; text-align: center; margin-top: 10px; display: none; }
+  .cs-btn { width: 100%; background: var(--navy, #2c2c2c); color: #fff; border: none; padding: 10px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; margin-top: 6px; font-family: inherit; }
+  .cs-btn:hover { background: var(--gold); }
+  .val-band { background: var(--bg-cream); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 26px 40px; display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 0; }
+  .val-band p { font-size: 13px; color: var(--text-light); }
+  .btn-val { background: var(--btn-gold); color: #fff; padding: 13px 22px; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; white-space: nowrap; flex-shrink: 0; }
+  .btn-val:hover { background: var(--btn-hover); }
+
+  /* FOOTER */
+  .footer { background: #2c2c2c; padding: 40px 40px 24px; }
+  .foot-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 28px; margin-bottom: 28px; }
+  .foot-col h4 { font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+  .foot-col address { font-size: 12px; line-height: 1.7; font-style: normal; color: rgba(255,255,255,0.6); }
+  .foot-col a { display: block; font-size: 12px; color: rgba(255,255,255,0.55); text-decoration: none; margin-bottom: 5px; }
+  .foot-col a:hover { color: var(--gold); }
+  .foot-col a.hi { color: var(--gold-light); }
+  .foot-btm { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; display: flex; justify-content: space-between; align-items: center; }
+  .foot-btm p { font-size: 11px; color: rgba(255,255,255,0.3); }
+  .foot-links { display: flex; gap: 16px; }
+  .foot-links a { font-size: 11px; color: rgba(255,255,255,0.3); text-decoration: none; }
+  .foot-links a:hover { color: var(--gold); }
+
+  @media (max-width: 860px) {
+    .wrap { grid-template-columns: 1fr; }
+    .right { padding-top: 0; }
+    .hero { grid-template-columns: 1fr; height: 200px; }
+    .hero-pane.right { display: none; }
+    .snap-grid { grid-template-columns: 1fr 1fr; }
+    .floor-grid, .market-row, .nearby { grid-template-columns: 1fr; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+    .val-band { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <span>UK ▾</span>
+  <a href="#">🔍 Site Search</a>
+  <a href="#">MyF&C</a>
+  <a href="#">Visit Fine &amp; Country UK</a>
+</div>
+
+<!-- HEADER -->
+<header class="main-header">
+  <div class="fc-logo">
+    <svg width="187" height="16" style="display:block;" viewBox="0 0 467 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_10480_7448)">
+<mask id="mask0_10480_7448" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="207" height="40">
+<path d="M9.25901 33.738H11.6275V6.56783H9.25901V33.738ZM26.2776 33.738H27.3521V6.56783H26.2776V33.738ZM0.0811775 39.5172H36.6922V37.151H0.0811775V39.5172ZM3.01312 36.1567H33.6648V34.7275H3.01312V36.1567ZM12.9789 33.738H15.3473V6.56783H12.9789V33.738ZM16.6891 33.738H19.0576V6.56783H16.6891V33.738ZM20.7576 33.738H21.832V6.56783H20.7576V33.738ZM23.5367 33.738H24.6111V6.56783H23.5367V33.738ZM2.97969 5.58312H33.6314V4.29727H2.97969V5.58312ZM0 3.31257H36.6111V0.645264H0V3.31257ZM176.475 39.1969H206.554V36.4627H176.475V39.1969Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_10480_7448)">
+<path d="M176.59 36.4626H176.475V39.1969H176.59V36.4626Z" fill="#867857"/>
+<path d="M177.788 36.4626H176.59V39.1969H177.788V36.4626Z" fill="#867856"/>
+<path d="M178.987 36.4626H177.788V39.1969H178.987V36.4626Z" fill="#857756"/>
+<path d="M180.185 36.4626H178.987V39.1969H180.185V36.4626Z" fill="#857756"/>
+<path d="M181.384 36.4626H180.186V39.1969H181.384V36.4626Z" fill="#857655"/>
+<path d="M182.583 36.4626H181.384V39.1969H182.583V36.4626Z" fill="#847655"/>
+<path d="M183.781 36.4626H182.583V39.1969H183.781V36.4626Z" fill="#847655"/>
+<path d="M184.98 36.4626H183.781V39.1969H184.98V36.4626Z" fill="#837555"/>
+<path d="M186.178 36.4626H184.98V39.1969H186.178V36.4626Z" fill="#837554"/>
+<path d="M187.377 36.4626H186.178V39.1969H187.377V36.4626Z" fill="#827554"/>
+<path d="M188.576 36.4626H187.377V39.1969H188.576V36.4626Z" fill="#827454"/>
+<path d="M189.774 36.4626H188.575V39.1969H189.774V36.4626Z" fill="#817454"/>
+<path d="M190.972 36.4626H189.774V39.1969H190.972V36.4626Z" fill="#817453"/>
+<path d="M192.171 36.4626H190.972V39.1969H192.171V36.4626Z" fill="#807353"/>
+<path d="M193.37 36.4626H192.171V39.1969H193.37V36.4626Z" fill="#807353"/>
+<path d="M194.568 36.4626H193.37V39.1969H194.568V36.4626Z" fill="#7F7252"/>
+<path d="M195.767 36.4626H194.568V39.1969H195.767V36.4626Z" fill="#7F7252"/>
+<path d="M196.965 36.4626H195.767V39.1969H196.965V36.4626Z" fill="#7E7252"/>
+<path d="M198.164 36.4626H196.965V39.1969H198.164V36.4626Z" fill="#7E7152"/>
+<path d="M199.362 36.4626H198.164V39.1969H199.362V36.4626Z" fill="#7D7151"/>
+<path d="M200.561 36.4626H199.363V39.1969H200.561V36.4626Z" fill="#7D7151"/>
+<path d="M201.76 36.4626H200.561V39.1969H201.76V36.4626Z" fill="#7C7051"/>
+<path d="M202.958 36.4626H201.76V39.1969H202.958V36.4626Z" fill="#7C7051"/>
+<path d="M204.157 36.4626H202.958V39.1969H204.157V36.4626Z" fill="#7C7050"/>
+<path d="M205.355 36.4626H204.157V39.1969H205.355V36.4626Z" fill="#7B6F50"/>
+<path d="M206.554 36.4626H205.355V39.1969H206.554V36.4626Z" fill="#7B6F50"/>
+<path d="M0.730598 0.645264H0V3.31257H0.730598V0.645264Z" fill="#7B6F50"/>
+<path d="M1.46131 0.645264H0.730713V3.31257H1.46131V0.645264Z" fill="#7B6F50"/>
+<path d="M2.19666 0.645264H1.46606V3.31257H2.19666V0.645264Z" fill="#7C7050"/>
+<path d="M2.92713 0.645264H2.19653V3.31257H2.92713V0.645264Z" fill="#7C7051"/>
+<path d="M3.65784 0.645264H2.92725V3.31257H3.65784V0.645264Z" fill="#7C7051"/>
+<path d="M4.38831 0.645264H3.65771V3.31257H4.38831V0.645264Z" fill="#7D7151"/>
+<path d="M5.12366 0.645264H4.39307V3.31257H5.12366V0.645264Z" fill="#7D7151"/>
+<path d="M5.85438 0.645264H5.12378V3.31257H5.85438V0.645264Z" fill="#7E7152"/>
+<path d="M6.58485 0.645264H5.85425V3.31257H6.58485V0.645264Z" fill="#7E7252"/>
+<path d="M7.3202 0.645264H6.5896V3.31257H7.3202V0.645264Z" fill="#7F7252"/>
+<path d="M8.05091 0.645264H7.32031V3.31257H8.05091V0.645264Z" fill="#7F7252"/>
+<path d="M8.78138 0.645264H8.05078V3.31257H8.78138V0.645264Z" fill="#807353"/>
+<path d="M9.51209 0.645264H8.78149V3.31257H9.51209V0.645264Z" fill="#807353"/>
+<path d="M10.2474 0.645264H9.51685V3.31257H10.2474V0.645264Z" fill="#817453"/>
+<path d="M10.9782 0.645264H10.2476V3.31257H10.9782V0.645264Z" fill="#817453"/>
+<path d="M11.7086 0.645264H10.978V3.31257H11.7086V0.645264Z" fill="#827454"/>
+<path d="M12.444 0.645264H11.7134V3.31257H12.444V0.645264Z" fill="#827554"/>
+<path d="M13.1747 0.645264H12.4441V3.31257H13.1747V0.645264Z" fill="#827554"/>
+<path d="M13.9052 0.645264H13.1746V3.31257H13.9052V0.645264Z" fill="#837555"/>
+<path d="M14.6359 0.645264H13.9053V3.31257H14.6359V0.645264Z" fill="#837655"/>
+<path d="M15.3712 0.645264H14.6406V3.31257H15.3712V0.645264Z" fill="#847655"/>
+<path d="M16.1017 0.645264H15.3711V3.31257H16.1017V0.645264Z" fill="#847655"/>
+<path d="M16.8324 0.645264H16.1018V3.31257H16.8324V0.645264Z" fill="#857756"/>
+<path d="M17.5678 0.645264H16.8372V3.31257H17.5678V0.645264Z" fill="#857756"/>
+<path d="M18.2985 0.645264H17.5679V3.31257H18.2985V0.645264Z" fill="#867856"/>
+<path d="M19.0289 0.645264H18.2983V3.31257H19.0289V0.645264Z" fill="#867856"/>
+<path d="M19.7597 0.645264H19.0291V3.31257H19.7597V0.645264Z" fill="#877857"/>
+<path d="M20.495 0.645264H19.7644V3.31257H20.495V0.645264Z" fill="#877957"/>
+<path d="M21.2255 0.645264H20.4949V3.31257H21.2255V0.645264Z" fill="#887957"/>
+<path d="M21.9562 0.645264H21.2256V3.31257H21.9562V0.645264Z" fill="#887958"/>
+<path d="M22.6867 0.645264H21.9561V3.31257H22.6867V0.645264Z" fill="#897A58"/>
+<path d="M23.422 0.645264H22.6914V3.31257H23.422V0.645264Z" fill="#897A58"/>
+<path d="M24.1527 0.645264H23.4221V3.31257H24.1527V0.645264Z" fill="#8A7A58"/>
+<path d="M24.8832 0.645264H24.1526V3.31257H24.8832V0.645264Z" fill="#8A7B59"/>
+<path d="M25.6188 0.645264H24.8882V3.31257H25.6188V0.645264Z" fill="#8A7B59"/>
+<path d="M26.3492 0.645264H25.6187V3.31257H26.3492V0.645264Z" fill="#8B7C59"/>
+<path d="M27.08 0.645264H26.3494V3.31257H27.08V0.645264Z" fill="#8B7C59"/>
+<path d="M27.8104 0.645264H27.0798V3.31257H27.8104V0.645264Z" fill="#8C7C5A"/>
+<path d="M28.5458 0.645264H27.8152V3.31257H28.5458V0.645264Z" fill="#8C7D5A"/>
+<path d="M29.2765 0.645264H28.5459V3.31257H29.2765V0.645264Z" fill="#8D7D5A"/>
+<path d="M30.007 0.645264H29.2764V3.31257H30.007V0.645264Z" fill="#8D7D5B"/>
+<path d="M30.7423 0.645264H30.0117V3.31257H30.7423V0.645264Z" fill="#8E7E5B"/>
+<path d="M31.473 0.645264H30.7424V3.31257H31.473V0.645264Z" fill="#8E7E5B"/>
+<path d="M32.2035 0.645264H31.4729V3.31257H32.2035V0.645264Z" fill="#8F7E5B"/>
+<path d="M32.9342 0.645264H32.2036V3.31257H32.9342V0.645264Z" fill="#8F7F5C"/>
+<path d="M33.6696 0.645264H32.939V3.31257H33.6696V0.645264Z" fill="#907F5C"/>
+<path d="M34.4003 0.645264H33.6697V3.31257H34.4003V0.645264Z" fill="#90805C"/>
+<path d="M35.1307 0.645264H34.4001V3.31257H35.1307V0.645264Z" fill="#90805D"/>
+<path d="M35.8661 0.645264H35.1355V3.31257H35.8661V0.645264Z" fill="#91805D"/>
+<path d="M36.5968 0.645264H35.8662V3.31257H36.5968V0.645264Z" fill="#91815D"/>
+<path d="M36.611 0.645264H36.5967V3.31257H36.611V0.645264Z" fill="#92815D"/>
+<path d="M3.65781 4.29724H2.97974V5.58309H3.65781V4.29724Z" fill="#7C7051"/>
+<path d="M4.38831 4.29724H3.65771V5.58309H4.38831V4.29724Z" fill="#7D7151"/>
+<path d="M5.12366 4.29724H4.39307V5.58309H5.12366V4.29724Z" fill="#7D7151"/>
+<path d="M5.85438 4.29724H5.12378V5.58309H5.85438V4.29724Z" fill="#7E7152"/>
+<path d="M6.58485 4.29724H5.85425V5.58309H6.58485V4.29724Z" fill="#7E7252"/>
+<path d="M7.3202 4.29724H6.5896V5.58309H7.3202V4.29724Z" fill="#7F7252"/>
+<path d="M8.05091 4.29724H7.32031V5.58309H8.05091V4.29724Z" fill="#7F7252"/>
+<path d="M8.78138 4.29724H8.05078V5.58309H8.78138V4.29724Z" fill="#807353"/>
+<path d="M9.51209 4.29724H8.78149V5.58309H9.51209V4.29724Z" fill="#807353"/>
+<path d="M10.2474 4.29724H9.51685V5.58309H10.2474V4.29724Z" fill="#817453"/>
+<path d="M10.9782 4.29724H10.2476V5.58309H10.9782V4.29724Z" fill="#817453"/>
+<path d="M11.7086 4.29724H10.978V5.58309H11.7086V4.29724Z" fill="#827454"/>
+<path d="M12.444 4.29724H11.7134V5.58309H12.444V4.29724Z" fill="#827554"/>
+<path d="M13.1747 4.29724H12.4441V5.58309H13.1747V4.29724Z" fill="#827554"/>
+<path d="M13.9052 4.29724H13.1746V5.58309H13.9052V4.29724Z" fill="#837555"/>
+<path d="M14.6359 4.29724H13.9053V5.58309H14.6359V4.29724Z" fill="#837655"/>
+<path d="M15.3712 4.29724H14.6406V5.58309H15.3712V4.29724Z" fill="#847655"/>
+<path d="M16.1017 4.29724H15.3711V5.58309H16.1017V4.29724Z" fill="#847655"/>
+<path d="M16.8324 4.29724H16.1018V5.58309H16.8324V4.29724Z" fill="#857756"/>
+<path d="M17.5678 4.29724H16.8372V5.58309H17.5678V4.29724Z" fill="#857756"/>
+<path d="M18.2985 4.29724H17.5679V5.58309H18.2985V4.29724Z" fill="#867856"/>
+<path d="M19.0289 4.29724H18.2983V5.58309H19.0289V4.29724Z" fill="#867856"/>
+<path d="M19.7597 4.29724H19.0291V5.58309H19.7597V4.29724Z" fill="#877857"/>
+<path d="M20.495 4.29724H19.7644V5.58309H20.495V4.29724Z" fill="#877957"/>
+<path d="M21.2255 4.29724H20.4949V5.58309H21.2255V4.29724Z" fill="#887957"/>
+<path d="M21.9562 4.29724H21.2256V5.58309H21.9562V4.29724Z" fill="#887958"/>
+<path d="M22.6867 4.29724H21.9561V5.58309H22.6867V4.29724Z" fill="#897A58"/>
+<path d="M23.422 4.29724H22.6914V5.58309H23.422V4.29724Z" fill="#897A58"/>
+<path d="M24.1527 4.29724H23.4221V5.58309H24.1527V4.29724Z" fill="#8A7A58"/>
+<path d="M24.8832 4.29724H24.1526V5.58309H24.8832V4.29724Z" fill="#8A7B59"/>
+<path d="M25.6188 4.29724H24.8882V5.58309H25.6188V4.29724Z" fill="#8A7B59"/>
+<path d="M26.3492 4.29724H25.6187V5.58309H26.3492V4.29724Z" fill="#8B7C59"/>
+<path d="M27.08 4.29724H26.3494V5.58309H27.08V4.29724Z" fill="#8B7C59"/>
+<path d="M27.8104 4.29724H27.0798V5.58309H27.8104V4.29724Z" fill="#8C7C5A"/>
+<path d="M28.5458 4.29724H27.8152V5.58309H28.5458V4.29724Z" fill="#8C7D5A"/>
+<path d="M29.2765 4.29724H28.5459V5.58309H29.2765V4.29724Z" fill="#8D7D5A"/>
+<path d="M30.007 4.29724H29.2764V5.58309H30.007V4.29724Z" fill="#8D7D5B"/>
+<path d="M30.7423 4.29724H30.0117V5.58309H30.7423V4.29724Z" fill="#8E7E5B"/>
+<path d="M31.473 4.29724H30.7424V5.58309H31.473V4.29724Z" fill="#8E7E5B"/>
+<path d="M32.2035 4.29724H31.4729V5.58309H32.2035V4.29724Z" fill="#8F7E5B"/>
+<path d="M32.9342 4.29724H32.2036V5.58309H32.9342V4.29724Z" fill="#8F7F5C"/>
+<path d="M33.6314 4.29724H32.939V5.58309H33.6314V4.29724Z" fill="#907F5C"/>
+<path d="M24.1574 6.56787H23.5366V33.738H24.1574V6.56787Z" fill="#8A7A58"/>
+<path d="M24.6062 6.56787H24.1526V33.738H24.6062V6.56787Z" fill="#8A7B59"/>
+<path d="M21.2255 6.56787H20.7576V33.738H21.2255V6.56787Z" fill="#887957"/>
+<path d="M21.832 6.56787H21.2256V33.738H21.832V6.56787Z" fill="#887958"/>
+<path d="M16.8372 6.56787H16.6892V33.738H16.8372V6.56787Z" fill="#857756"/>
+<path d="M17.5678 6.56787H16.8372V33.738H17.5678V6.56787Z" fill="#857756"/>
+<path d="M18.2985 6.56787H17.5679V33.738H18.2985V6.56787Z" fill="#867856"/>
+<path d="M19.0289 6.56787H18.2983V33.738H19.0289V6.56787Z" fill="#867856"/>
+<path d="M19.0529 6.56787H19.0291V33.738H19.0529V6.56787Z" fill="#877857"/>
+<path d="M13.1745 6.56787H12.9788V33.738H13.1745V6.56787Z" fill="#827554"/>
+<path d="M13.9052 6.56787H13.1746V33.738H13.9052V6.56787Z" fill="#837555"/>
+<path d="M14.6359 6.56787H13.9053V33.738H14.6359V6.56787Z" fill="#837655"/>
+<path d="M15.3473 6.56787H14.6406V33.738H15.3473V6.56787Z" fill="#847655"/>
+<path d="M3.65783 34.7275H3.01318V36.1568H3.65783V34.7275Z" fill="#7C7051"/>
+<path d="M4.38831 34.7275H3.65771V36.1568H4.38831V34.7275Z" fill="#7D7151"/>
+<path d="M5.12366 34.7275H4.39307V36.1568H5.12366V34.7275Z" fill="#7D7151"/>
+<path d="M5.85438 34.7275H5.12378V36.1568H5.85438V34.7275Z" fill="#7E7152"/>
+<path d="M6.58485 34.7275H5.85425V36.1568H6.58485V34.7275Z" fill="#7E7252"/>
+<path d="M7.3202 34.7275H6.5896V36.1568H7.3202V34.7275Z" fill="#7F7252"/>
+<path d="M8.05091 34.7275H7.32031V36.1568H8.05091V34.7275Z" fill="#7F7252"/>
+<path d="M8.78138 34.7275H8.05078V36.1568H8.78138V34.7275Z" fill="#807353"/>
+<path d="M9.51209 34.7275H8.78149V36.1568H9.51209V34.7275Z" fill="#807353"/>
+<path d="M10.2474 34.7275H9.51685V36.1568H10.2474V34.7275Z" fill="#817453"/>
+<path d="M10.9782 34.7275H10.2476V36.1568H10.9782V34.7275Z" fill="#817453"/>
+<path d="M11.7086 34.7275H10.978V36.1568H11.7086V34.7275Z" fill="#827454"/>
+<path d="M12.444 34.7275H11.7134V36.1568H12.444V34.7275Z" fill="#827554"/>
+<path d="M13.1747 34.7275H12.4441V36.1568H13.1747V34.7275Z" fill="#827554"/>
+<path d="M13.9052 34.7275H13.1746V36.1568H13.9052V34.7275Z" fill="#837555"/>
+<path d="M14.6359 34.7275H13.9053V36.1568H14.6359V34.7275Z" fill="#837655"/>
+<path d="M15.3712 34.7275H14.6406V36.1568H15.3712V34.7275Z" fill="#847655"/>
+<path d="M16.1017 34.7275H15.3711V36.1568H16.1017V34.7275Z" fill="#847655"/>
+<path d="M16.8324 34.7275H16.1018V36.1568H16.8324V34.7275Z" fill="#857756"/>
+<path d="M17.5678 34.7275H16.8372V36.1568H17.5678V34.7275Z" fill="#857756"/>
+<path d="M18.2985 34.7275H17.5679V36.1568H18.2985V34.7275Z" fill="#867856"/>
+<path d="M19.0289 34.7275H18.2983V36.1568H19.0289V34.7275Z" fill="#867856"/>
+<path d="M19.7597 34.7275H19.0291V36.1568H19.7597V34.7275Z" fill="#877857"/>
+<path d="M20.495 34.7275H19.7644V36.1568H20.495V34.7275Z" fill="#877957"/>
+<path d="M21.2255 34.7275H20.4949V36.1568H21.2255V34.7275Z" fill="#887957"/>
+<path d="M21.9562 34.7275H21.2256V36.1568H21.9562V34.7275Z" fill="#887958"/>
+<path d="M22.6867 34.7275H21.9561V36.1568H22.6867V34.7275Z" fill="#897A58"/>
+<path d="M23.422 34.7275H22.6914V36.1568H23.422V34.7275Z" fill="#897A58"/>
+<path d="M24.1527 34.7275H23.4221V36.1568H24.1527V34.7275Z" fill="#8A7A58"/>
+<path d="M24.8832 34.7275H24.1526V36.1568H24.8832V34.7275Z" fill="#8A7B59"/>
+<path d="M25.6188 34.7275H24.8882V36.1568H25.6188V34.7275Z" fill="#8A7B59"/>
+<path d="M26.3492 34.7275H25.6187V36.1568H26.3492V34.7275Z" fill="#8B7C59"/>
+<path d="M27.08 34.7275H26.3494V36.1568H27.08V34.7275Z" fill="#8B7C59"/>
+<path d="M27.8104 34.7275H27.0798V36.1568H27.8104V34.7275Z" fill="#8C7C5A"/>
+<path d="M28.5458 34.7275H27.8152V36.1568H28.5458V34.7275Z" fill="#8C7D5A"/>
+<path d="M29.2765 34.7275H28.5459V36.1568H29.2765V34.7275Z" fill="#8D7D5A"/>
+<path d="M30.007 34.7275H29.2764V36.1568H30.007V34.7275Z" fill="#8D7D5B"/>
+<path d="M30.7423 34.7275H30.0117V36.1568H30.7423V34.7275Z" fill="#8E7E5B"/>
+<path d="M31.473 34.7275H30.7424V36.1568H31.473V34.7275Z" fill="#8E7E5B"/>
+<path d="M32.2035 34.7275H31.4729V36.1568H32.2035V34.7275Z" fill="#8F7E5B"/>
+<path d="M32.9342 34.7275H32.2036V36.1568H32.9342V34.7275Z" fill="#8F7F5C"/>
+<path d="M33.6696 34.7275H32.939V36.1568H33.6696V34.7275Z" fill="#907F5C"/>
+<path d="M0.730719 37.151H0.0812988V39.5172H0.730719V37.151Z" fill="#7B6F50"/>
+<path d="M1.46131 37.151H0.730713V39.5172H1.46131V37.151Z" fill="#7B6F50"/>
+<path d="M2.19666 37.151H1.46606V39.5172H2.19666V37.151Z" fill="#7C7050"/>
+<path d="M2.92713 37.151H2.19653V39.5172H2.92713V37.151Z" fill="#7C7051"/>
+<path d="M3.65784 37.151H2.92725V39.5172H3.65784V37.151Z" fill="#7C7051"/>
+<path d="M4.38831 37.151H3.65771V39.5172H4.38831V37.151Z" fill="#7D7151"/>
+<path d="M5.12366 37.151H4.39307V39.5172H5.12366V37.151Z" fill="#7D7151"/>
+<path d="M5.85438 37.151H5.12378V39.5172H5.85438V37.151Z" fill="#7E7152"/>
+<path d="M6.58485 37.151H5.85425V39.5172H6.58485V37.151Z" fill="#7E7252"/>
+<path d="M7.3202 37.151H6.5896V39.5172H7.3202V37.151Z" fill="#7F7252"/>
+<path d="M8.05091 37.151H7.32031V39.5172H8.05091V37.151Z" fill="#7F7252"/>
+<path d="M8.78138 37.151H8.05078V39.5172H8.78138V37.151Z" fill="#807353"/>
+<path d="M9.51209 37.151H8.78149V39.5172H9.51209V37.151Z" fill="#807353"/>
+<path d="M10.2474 37.151H9.51685V39.5172H10.2474V37.151Z" fill="#817453"/>
+<path d="M10.9782 37.151H10.2476V39.5172H10.9782V37.151Z" fill="#817453"/>
+<path d="M11.7086 37.151H10.978V39.5172H11.7086V37.151Z" fill="#827454"/>
+<path d="M12.444 37.151H11.7134V39.5172H12.444V37.151Z" fill="#827554"/>
+<path d="M13.1747 37.151H12.4441V39.5172H13.1747V37.151Z" fill="#827554"/>
+<path d="M13.9052 37.151H13.1746V39.5172H13.9052V37.151Z" fill="#837555"/>
+<path d="M14.6359 37.151H13.9053V39.5172H14.6359V37.151Z" fill="#837655"/>
+<path d="M15.3712 37.151H14.6406V39.5172H15.3712V37.151Z" fill="#847655"/>
+<path d="M16.1017 37.151H15.3711V39.5172H16.1017V37.151Z" fill="#847655"/>
+<path d="M16.8324 37.151H16.1018V39.5172H16.8324V37.151Z" fill="#857756"/>
+<path d="M17.5678 37.151H16.8372V39.5172H17.5678V37.151Z" fill="#857756"/>
+<path d="M18.2985 37.151H17.5679V39.5172H18.2985V37.151Z" fill="#867856"/>
+<path d="M19.0289 37.151H18.2983V39.5172H19.0289V37.151Z" fill="#867856"/>
+<path d="M19.7597 37.151H19.0291V39.5172H19.7597V37.151Z" fill="#877857"/>
+<path d="M20.495 37.151H19.7644V39.5172H20.495V37.151Z" fill="#877957"/>
+<path d="M21.2255 37.151H20.4949V39.5172H21.2255V37.151Z" fill="#887957"/>
+<path d="M21.9562 37.151H21.2256V39.5172H21.9562V37.151Z" fill="#887958"/>
+<path d="M22.6867 37.151H21.9561V39.5172H22.6867V37.151Z" fill="#897A58"/>
+<path d="M23.422 37.151H22.6914V39.5172H23.422V37.151Z" fill="#897A58"/>
+<path d="M24.1527 37.151H23.4221V39.5172H24.1527V37.151Z" fill="#8A7A58"/>
+<path d="M24.8832 37.151H24.1526V39.5172H24.8832V37.151Z" fill="#8A7B59"/>
+<path d="M25.6188 37.151H24.8882V39.5172H25.6188V37.151Z" fill="#8A7B59"/>
+<path d="M26.3492 37.151H25.6187V39.5172H26.3492V37.151Z" fill="#8B7C59"/>
+<path d="M27.08 37.151H26.3494V39.5172H27.08V37.151Z" fill="#8B7C59"/>
+<path d="M27.8104 37.151H27.0798V39.5172H27.8104V37.151Z" fill="#8C7C5A"/>
+<path d="M28.5458 37.151H27.8152V39.5172H28.5458V37.151Z" fill="#8C7D5A"/>
+<path d="M29.2765 37.151H28.5459V39.5172H29.2765V37.151Z" fill="#8D7D5A"/>
+<path d="M30.007 37.151H29.2764V39.5172H30.007V37.151Z" fill="#8D7D5B"/>
+<path d="M30.7423 37.151H30.0117V39.5172H30.7423V37.151Z" fill="#8E7E5B"/>
+<path d="M31.473 37.151H30.7424V39.5172H31.473V37.151Z" fill="#8E7E5B"/>
+<path d="M32.2035 37.151H31.4729V39.5172H32.2035V37.151Z" fill="#8F7E5B"/>
+<path d="M32.9342 37.151H32.2036V39.5172H32.9342V37.151Z" fill="#8F7F5C"/>
+<path d="M33.6696 37.151H32.939V39.5172H33.6696V37.151Z" fill="#907F5C"/>
+<path d="M34.4003 37.151H33.6697V39.5172H34.4003V37.151Z" fill="#90805C"/>
+<path d="M35.1307 37.151H34.4001V39.5172H35.1307V37.151Z" fill="#90805D"/>
+<path d="M35.8661 37.151H35.1355V39.5172H35.8661V37.151Z" fill="#91805D"/>
+<path d="M36.5968 37.151H35.8662V39.5172H36.5968V37.151Z" fill="#91815D"/>
+<path d="M36.6922 37.151H36.5967V39.5172H36.6922V37.151Z" fill="#92815D"/>
+<path d="M26.3492 6.56787H26.2776V33.738H26.3492V6.56787Z" fill="#8B7C59"/>
+<path d="M27.08 6.56787H26.3494V33.738H27.08V6.56787Z" fill="#8B7C59"/>
+<path d="M27.3472 6.56787H27.0798V33.738H27.3472V6.56787Z" fill="#8C7C5A"/>
+<path d="M9.51689 6.56787H9.25903V33.738H9.51689V6.56787Z" fill="#807353"/>
+<path d="M10.2474 6.56787H9.51685V33.738H10.2474V6.56787Z" fill="#817453"/>
+<path d="M10.9782 6.56787H10.2476V33.738H10.9782V6.56787Z" fill="#817453"/>
+<path d="M11.6274 6.56787H10.978V33.738H11.6274V6.56787Z" fill="#827454"/>
+</g>
+<path d="M133.05 0.549683V1.56307L132.825 1.57741C131.703 1.64911 130.763 1.72559 130.032 1.79729C129.32 1.86899 128.771 1.98372 128.394 2.13668C128.046 2.28008 127.807 2.47607 127.664 2.73898C127.52 3.01622 127.449 3.41297 127.449 3.91966V39.7227H126.532L102.79 4.80398V36.0803C102.79 36.5822 102.881 36.9837 103.057 37.2753C103.224 37.5526 103.535 37.7677 103.969 37.9111C104.442 38.0688 105.106 38.1787 105.941 38.2313C106.801 38.2839 107.89 38.3508 109.208 38.4225L109.432 38.4369V39.4503H96.1619V38.4369L96.3815 38.4225C97.518 38.3508 98.4492 38.2839 99.1798 38.2313C99.8865 38.1787 100.436 38.0736 100.813 37.9206C101.161 37.7772 101.4 37.5717 101.539 37.2944C101.687 36.9981 101.763 36.5917 101.763 36.0803V4.57932C101.763 4.06307 101.691 3.61852 101.558 3.26479C101.429 2.9254 101.19 2.64815 100.827 2.41871C100.455 2.1797 99.9104 1.99806 99.2132 1.87377C98.4921 1.74949 97.5419 1.64911 96.3863 1.57741L96.1619 1.56307V0.549683H106.137L126.422 30.7982V3.91966C126.422 3.41775 126.331 3.03056 126.155 2.7581C125.987 2.49519 125.677 2.28964 125.238 2.14146C124.77 1.98372 124.101 1.86899 123.261 1.79729C122.401 1.72559 121.303 1.64911 119.999 1.57741L119.775 1.56307V0.549683H133.05Z" fill="#231F20"/>
+<path d="M189.421 0.568848C189.569 0.592748 189.712 0.621429 189.855 0.65489C189.707 0.626209 189.569 0.587968 189.421 0.568848Z" fill="#231F20"/>
+<path d="M195.442 13.8671V14.7658L195.652 14.7897C197.978 15.0717 199.444 15.6836 200.012 16.6109C200.36 17.1845 200.38 17.8728 200.064 18.7285C199.888 19.283 199.659 19.8662 199.382 20.4685C199.1 21.0755 198.799 21.673 198.493 22.2467C198.183 22.8203 197.868 23.3556 197.562 23.8384C197.328 24.2065 197.123 24.5363 196.946 24.8279L188.179 14.2734C190.571 13.0497 192.329 11.7161 193.408 10.3155C194.54 8.84799 195.117 7.44742 195.117 6.14245C195.117 4.19694 194.439 2.6673 193.102 1.59656C191.78 0.540153 190.089 0 188.074 0C186.981 0 185.93 0.172084 184.956 0.506692C183.977 0.8413 183.108 1.32409 182.373 1.93595C181.632 2.55258 181.04 3.30784 180.61 4.1826C180.181 5.06214 179.961 6.06597 179.961 7.17495C179.961 8.64245 180.362 10.0765 181.155 11.4293C181.9 12.7055 182.888 14.0822 184.096 15.5306C183.385 15.9895 182.659 16.4723 181.9 16.9694C181.055 17.5287 180.267 18.1788 179.56 18.9054C178.844 19.6319 178.242 20.4637 177.769 21.3767C177.292 22.2992 177.053 23.3891 177.053 24.6176C177.053 25.8461 177.258 26.912 177.674 27.9063C178.089 28.9054 178.686 29.7658 179.455 30.4732C180.224 31.1759 181.15 31.7304 182.22 32.108C183.289 32.4904 184.488 32.6816 185.791 32.6816C186.369 32.6816 187.028 32.6291 187.749 32.5239C188.485 32.414 189.268 32.2084 190.08 31.9073C190.896 31.6061 191.746 31.1807 192.61 30.631C193.408 30.1291 194.21 29.4885 194.998 28.7237L197.987 32.2371H204.424V31.3432L204.219 31.3145C203.426 31.1998 202.762 30.956 202.242 30.5927C201.712 30.2199 201.129 29.6606 200.518 28.9293L197.596 25.5832C198.159 24.7514 198.751 23.7763 199.358 22.6721C200.002 21.5105 200.633 20.1434 201.23 18.6233C201.44 18.0545 201.631 17.5478 201.812 17.1032C201.979 16.6826 202.199 16.3145 202.462 16.0086C202.719 15.7075 203.092 15.4589 203.56 15.2677C204.047 15.0669 204.735 14.9044 205.604 14.7897L205.809 14.761V13.8671H195.442ZM189.855 0.654876C189.712 0.621415 189.569 0.592734 189.421 0.568834C189.569 0.587954 189.707 0.626195 189.855 0.654876ZM184.02 5.47323C184.02 4.99522 184.106 4.48375 184.273 3.95793C184.445 3.44168 184.717 2.94455 185.085 2.49522C185.448 2.04589 185.906 1.67304 186.441 1.39101C186.971 1.11377 187.625 0.970363 188.389 0.970363C189.932 0.970363 191.016 1.43881 191.708 2.39484C192.405 3.36042 192.758 4.63671 192.758 6.19025C192.758 7.30401 192.376 8.53728 191.627 9.85182C190.896 11.1233 189.526 12.3614 187.554 13.5277C186.976 12.782 186.465 12.1032 186.03 11.5057C185.562 10.8652 185.18 10.2199 184.889 9.59847C184.598 8.97706 184.378 8.32218 184.235 7.65774C184.092 6.99809 184.02 6.26195 184.02 5.47323ZM192.801 29.2925C192.171 29.6989 191.522 30.0478 190.867 30.3203C190.218 30.5975 189.564 30.8031 188.924 30.9321C188.284 31.066 187.716 31.1329 187.224 31.1329C186.193 31.1329 185.295 30.9417 184.555 30.5736C183.819 30.2055 183.189 29.6893 182.692 29.0344C182.191 28.3748 181.814 27.5765 181.57 26.6587C181.322 25.7266 181.198 24.6941 181.198 23.5851C181.198 22.8967 181.298 22.1797 181.503 21.4627C181.704 20.7361 181.981 20.0287 182.315 19.3547C182.649 18.6902 183.046 18.0736 183.495 17.5239C183.886 17.0411 184.302 16.6348 184.722 16.3098L194.382 27.9637C193.9 28.4751 193.37 28.9197 192.801 29.2925Z" fill="#231F20"/>
+<path d="M189.421 0.568848C189.569 0.592748 189.712 0.621429 189.855 0.65489C189.707 0.626209 189.569 0.587968 189.421 0.568848Z" fill="#231F20"/>
+<path d="M189.421 0.568848C189.569 0.592748 189.712 0.621429 189.855 0.65489C189.707 0.626209 189.569 0.587968 189.421 0.568848ZM189.421 0.568848C189.569 0.592748 189.712 0.621429 189.855 0.65489C189.707 0.626209 189.569 0.587968 189.421 0.568848Z" fill="#231F20"/>
+<path d="M75.3948 9.97607H74.4112L74.3634 9.79442C74.0626 8.56116 73.7235 7.47607 73.3272 6.47225C72.9404 5.47798 72.4438 4.60322 71.8565 3.87664C71.2787 3.15963 70.5672 2.59079 69.7411 2.18448C68.9197 1.78295 67.9313 1.57741 66.7996 1.57741H56.8768V20.2533H62.8983C64.5839 20.2533 65.9162 19.7896 66.8521 18.8671C67.7928 17.9445 68.3993 16.3958 68.6476 14.2638L68.6714 14.0535H69.6742V27.4856H68.6714L68.6476 27.2753C68.3993 25.1434 67.7928 23.5898 66.8521 22.6673C65.9114 21.7447 64.5791 21.281 62.8983 21.281H56.8768V36.0803C56.8768 36.6013 56.9198 37.022 57.0058 37.3374C57.0774 37.5956 57.2445 37.7916 57.5167 37.9254C57.8128 38.0736 58.2664 38.1787 58.8585 38.2313C59.4745 38.2839 60.3197 38.3508 61.375 38.4225L61.5994 38.4369V39.4503H47.0066V38.4369L47.231 38.4225C48.2911 38.3508 49.1315 38.2839 49.7571 38.2313C50.3444 38.1787 50.7981 38.0736 51.0989 37.9254C51.3663 37.7916 51.5334 37.5956 51.6051 37.3374C51.691 37.022 51.734 36.6013 51.734 36.0803V3.91966C51.734 3.39863 51.691 2.98754 51.6051 2.69595C51.5334 2.44739 51.3663 2.26574 51.0989 2.1319C50.7933 1.97416 50.3396 1.86421 49.7475 1.79729C49.0647 1.71603 48.1956 1.63955 47.231 1.57741L47.0066 1.56307V0.549683H75.0988L75.3948 9.97607Z" fill="#231F20"/>
+<path d="M87.8531 3.91966V36.0803C87.8531 36.6109 87.8961 37.0315 87.9821 37.3327C88.0537 37.6004 88.2208 37.7916 88.4882 37.9254C88.7891 38.0784 89.2427 38.1787 89.8301 38.2313C90.4508 38.2887 91.2912 38.3508 92.3513 38.4225L92.5758 38.4369V39.4503H77.9829V38.4369L78.2073 38.4225C79.2627 38.3508 80.1031 38.2887 80.7286 38.2313C81.316 38.1787 81.7696 38.0784 82.0704 37.9254C82.3378 37.7916 82.505 37.6004 82.5766 37.3327C82.6626 37.0267 82.7055 36.6061 82.7055 36.0803V3.91966C82.7055 3.39863 82.6626 2.98754 82.5766 2.69595C82.505 2.44739 82.3378 2.26096 82.0704 2.12712C81.7696 1.97894 81.316 1.86421 80.7191 1.79729C80.0983 1.72559 79.2531 1.64911 78.2073 1.57741L77.9829 1.56307V0.549683H92.5758V1.56307L92.3513 1.57741C91.3008 1.64911 90.4556 1.72559 89.8348 1.79729C89.2427 1.86421 88.7891 1.97894 88.4882 2.12712C88.2161 2.26574 88.0537 2.44739 87.9773 2.69595C87.8961 2.98276 87.8531 3.39385 87.8531 3.91966Z" fill="#231F20"/>
+<path d="M165.191 30.0239L164.609 39.4503H136.197V38.4369L136.416 38.4225C137.477 38.3508 138.317 38.2887 138.938 38.2313C139.53 38.1787 139.979 38.0784 140.28 37.9254C140.552 37.7916 140.714 37.6004 140.79 37.3374C140.876 37.0267 140.919 36.6061 140.919 36.0803V3.91966C140.919 3.39863 140.876 2.98754 140.79 2.69595C140.719 2.44739 140.552 2.26096 140.28 2.12712C139.979 1.97894 139.525 1.86421 138.933 1.79729C138.312 1.72559 137.467 1.64911 136.416 1.57741L136.197 1.56307V0.549683H164.289L164.58 9.97607H163.597L163.549 9.79442C163.262 8.5994 162.914 7.48563 162.517 6.47703C162.126 5.47798 161.629 4.60322 161.042 3.87664C160.464 3.15963 159.753 2.59079 158.926 2.18448C158.105 1.78295 157.112 1.57741 155.985 1.57741H146.062V19.1587H152.084C153.769 19.1587 155.102 18.6902 156.038 17.7724C156.983 16.8451 157.585 15.2963 157.833 13.1644L157.857 12.9541H158.86V26.3862H157.857L157.833 26.1759C157.585 24.0439 156.983 22.4952 156.038 21.5726C155.097 20.6501 153.769 20.1864 152.084 20.1864H146.062V38.4225H155.546C157.814 38.4225 159.676 37.7246 161.09 36.348C161.801 35.6548 162.412 34.7944 162.928 33.7667C163.439 32.739 163.85 31.5535 164.155 30.2103L164.198 30.0239H165.191Z" fill="#231F20"/>
+<path d="M367.433 0.549683V1.56307L367.214 1.57741C366.092 1.64911 365.151 1.72559 364.42 1.79729C363.709 1.86899 363.16 1.98372 362.782 2.13668C362.434 2.28008 362.19 2.47607 362.052 2.73898C361.909 3.01622 361.832 3.41297 361.832 3.91966V39.7227H360.92L360.849 39.6176L337.178 4.80398V36.0803C337.178 36.5822 337.264 36.9837 337.441 37.2753C337.613 37.5526 337.918 37.7677 338.358 37.9111C338.83 38.0688 339.494 38.1787 340.33 38.2313C341.189 38.2839 342.278 38.3508 343.596 38.4225L343.82 38.4369V39.4503H330.545V38.4369L330.77 38.4225C331.906 38.3508 332.837 38.2839 333.568 38.2313C334.275 38.1787 334.819 38.0736 335.196 37.9206C335.55 37.7772 335.789 37.5717 335.927 37.2944C336.075 36.9981 336.147 36.5917 336.147 36.0803V4.57932C336.147 4.05829 336.08 3.61852 335.946 3.26479C335.817 2.9254 335.578 2.64815 335.216 2.41871C334.843 2.1797 334.299 1.99806 333.602 1.87377C332.88 1.74949 331.93 1.64911 330.77 1.57741L330.545 1.56307V0.549683H340.525L360.806 30.7982V3.91966C360.806 3.41775 360.72 3.03056 360.543 2.7581C360.371 2.49519 360.065 2.28964 359.626 2.14146C359.153 1.98372 358.49 1.86899 357.649 1.79729C356.79 1.72559 355.691 1.64911 354.388 1.57741L354.163 1.56307V0.549683H367.433Z" fill="#231F20"/>
+<path d="M398.801 9.97607H397.813L397.77 9.78964C397.235 7.34701 396.361 5.33936 395.182 3.81928C394.026 2.33267 392.388 1.57741 390.316 1.57741H386.658V36.0803C386.658 36.6061 386.701 37.0267 386.787 37.3327C386.859 37.6004 387.026 37.7916 387.293 37.9254C387.594 38.0784 388.048 38.1787 388.635 38.2313C389.256 38.2887 390.096 38.3508 391.156 38.4225L391.381 38.4369V39.4503H376.788V38.4369L377.012 38.4225C378.073 38.3508 378.908 38.2887 379.534 38.2313C380.121 38.1787 380.575 38.0784 380.876 37.9254C381.143 37.7916 381.31 37.6004 381.382 37.3374C381.468 37.0267 381.511 36.6061 381.511 36.0803V1.57741H377.853C375.78 1.57741 374.143 2.33267 372.987 3.81928C371.808 5.33936 370.934 7.34701 370.394 9.78964L370.356 9.97607H369.367L369.654 0.549683H398.51L398.801 9.97607Z" fill="#231F20"/>
+<path d="M436.315 38.4225C435.25 38.2839 434.195 37.9397 433.182 37.4091C432.175 36.8786 431.182 35.9082 430.222 34.522L425.604 27.6577C425.275 27.1797 424.893 26.6778 424.468 26.1615C424.038 25.6357 423.489 25.1243 422.835 24.6367C422.18 24.1539 421.373 23.6854 420.433 23.2409C419.798 22.9445 419.062 22.6529 418.231 22.3709C420.318 22.2227 422.123 21.8738 423.623 21.3241C425.442 20.6548 426.927 19.7992 428.04 18.7763C429.162 17.7485 429.988 16.5535 430.494 15.2294C430.995 13.9101 431.248 12.5621 431.248 11.2189C431.248 9.69404 430.957 8.25523 430.379 6.95026C429.797 5.64529 428.947 4.49806 427.844 3.54681C426.745 2.59557 425.37 1.84987 423.751 1.32884C422.142 0.812589 420.28 0.549683 418.217 0.549683H401.996V1.56307L402.216 1.57741C403.266 1.64911 404.111 1.72559 404.732 1.79729C405.329 1.86421 405.783 1.97894 406.083 2.12712C406.351 2.26574 406.518 2.44739 406.59 2.69595C406.675 2.98754 406.718 3.39863 406.718 3.91966V36.0803C406.718 36.6061 406.675 37.0267 406.59 37.3374C406.518 37.6004 406.351 37.7916 406.083 37.9254C405.783 38.0784 405.329 38.1787 404.737 38.2313C404.116 38.2887 403.276 38.3508 402.216 38.4225L401.996 38.4369V39.4503H416.589V38.4369L416.364 38.4225C415.304 38.3508 414.464 38.2887 413.843 38.2313C413.251 38.1787 412.802 38.0784 412.501 37.9254C412.229 37.7916 412.067 37.6004 411.99 37.3327C411.909 37.0315 411.861 36.6109 411.861 36.0803V22.433H415.51C416.488 23.0401 417.405 23.9005 418.246 25.0048C419.115 26.1472 419.946 27.3327 420.7 28.5229L424.048 33.9483C424.492 34.7227 425.093 35.6405 425.848 36.6874C426.597 37.7294 427.314 38.6329 427.977 39.369L428.049 39.4503H436.52V38.4512L436.315 38.4225ZM412.339 1.57741H417.539C419.244 1.57741 420.667 1.89289 421.76 2.50953C422.858 3.12616 423.756 3.934 424.43 4.90437C425.103 5.88429 425.58 6.98372 425.843 8.16919C426.115 9.37377 426.254 10.5449 426.254 11.6587C426.254 12.9111 426.086 14.1348 425.767 15.2963C425.447 16.4483 424.902 17.4904 424.138 18.3891C423.379 19.2925 422.338 20.0286 421.044 20.5784C419.745 21.1281 418.083 21.4101 416.111 21.4101H412.339V1.57741Z" fill="#231F20"/>
+<path d="M467 0.549683V1.53439L466.809 1.57263C465.353 1.85943 464.259 2.29442 463.567 2.86804C462.865 3.44643 462.277 4.27339 461.819 5.3298L452.832 24.9378V36.0803C452.832 36.6109 452.875 37.0315 452.961 37.3327C453.033 37.6004 453.2 37.7916 453.467 37.9254C453.768 38.0784 454.222 38.1787 454.809 38.2313C455.435 38.2887 456.27 38.3508 457.33 38.4225L457.555 38.4369V39.4503H442.962V38.4369L443.186 38.4225C444.246 38.3508 445.087 38.2887 445.708 38.2313C446.3 38.1787 446.749 38.0784 447.049 37.9254C447.317 37.7916 447.484 37.6004 447.56 37.3327C447.641 37.0267 447.684 36.6061 447.684 36.0803V25.7648L437.06 5.12425C436.85 4.7036 436.611 4.28295 436.358 3.88142C436.114 3.49901 435.804 3.15007 435.441 2.83936C435.078 2.52865 434.62 2.25618 434.075 2.02674C433.536 1.79729 432.862 1.64911 432.089 1.57741L431.869 1.55829V0.549683H446.405V1.55351L446.19 1.57741C445.077 1.68257 444.213 1.84509 443.611 2.0602C443.038 2.26096 442.642 2.50953 442.437 2.79634C442.236 3.07358 442.164 3.39385 442.231 3.7667C442.298 4.18257 442.475 4.6797 442.757 5.23898L452.149 23.9531L460.119 6.51049C460.802 5.00475 460.802 3.87664 460.109 3.15007C459.384 2.39003 457.77 1.85943 455.31 1.57741L455.1 1.55351V0.549683H467Z" fill="#231F20"/>
+<path d="M283.477 11.9551C282.498 9.52199 281.151 7.39006 279.475 5.62141C277.794 3.84799 275.779 2.4522 273.492 1.47706C271.2 0.497132 268.712 0 266.095 0C263.478 0 260.986 0.497132 258.694 1.47706C256.406 2.4522 254.391 3.84799 252.715 5.62141C251.034 7.39006 249.688 9.52199 248.709 11.9551C247.735 14.3834 247.238 17.0889 247.238 20C247.238 22.9111 247.735 25.6166 248.709 28.0497C249.688 30.478 251.034 32.6099 252.715 34.3786C254.396 36.152 256.406 37.5478 258.694 38.5229C260.986 39.5029 263.474 40 266.095 40C268.717 40 271.2 39.5029 273.492 38.5229C275.779 37.5478 277.789 36.152 279.475 34.3786C281.151 32.6099 282.498 30.478 283.477 28.0497C284.456 25.6166 284.947 22.9063 284.947 20C284.947 17.0937 284.456 14.3834 283.477 11.9551ZM266.573 38.9723C264.715 38.9723 262.953 38.5086 261.334 37.6004C259.706 36.6922 258.273 35.3824 257.07 33.7189C255.867 32.0459 254.907 30.0191 254.224 27.7008C253.536 25.3728 253.193 22.782 253.193 20C253.193 17.218 253.536 14.6272 254.224 12.2992C254.907 9.98088 255.867 7.95411 257.07 6.28107C258.273 4.61759 259.706 3.30784 261.334 2.39962C262.953 1.4914 264.715 1.02772 266.573 1.02772C268.43 1.02772 270.187 1.4914 271.811 2.39962C273.434 3.30784 274.872 4.61759 276.07 6.28107C277.278 7.95411 278.234 9.98088 278.916 12.2992C279.604 14.6319 279.953 17.218 279.953 20C279.953 22.782 279.604 25.3681 278.916 27.7008C278.234 30.0191 277.278 32.0459 276.07 33.7189C274.872 35.3824 273.434 36.6922 271.811 37.6004C270.187 38.5086 268.425 38.9723 266.573 38.9723Z" fill="#231F20"/>
+<path d="M244.994 28.5994L244.187 36.6109L244.086 36.673C243.532 37.0029 242.854 37.3662 242.062 37.7533C241.269 38.1405 240.362 38.5038 239.369 38.8336C238.375 39.1635 237.267 39.4455 236.069 39.6654C234.87 39.8853 233.572 40 232.211 40C229.589 40 227.111 39.5029 224.838 38.5229C222.57 37.5478 220.564 36.152 218.883 34.3786C217.207 32.6099 215.87 30.478 214.91 28.0449C213.95 25.6166 213.463 22.9111 213.463 20C213.463 17.0889 213.95 14.3834 214.91 11.9551C215.865 9.52199 217.207 7.39006 218.883 5.62141C220.564 3.84799 222.565 2.45698 224.838 1.47706C227.111 0.497132 229.589 0 232.211 0C233.576 0 234.875 0.114723 236.069 0.334608C237.267 0.554493 238.375 0.83652 239.369 1.16635C240.362 1.49618 241.269 1.86424 242.062 2.25143C242.854 2.63862 243.537 3.00191 244.086 3.32696L244.191 3.39388L244.769 11.4006H243.776L243.733 11.2189C243.442 10.0382 242.979 8.82409 242.348 7.62428C241.723 6.42447 240.916 5.31549 239.946 4.33556C238.982 3.35086 237.841 2.5478 236.556 1.94073C235.276 1.33365 233.815 1.02772 232.211 1.02772C230.353 1.02772 228.596 1.44359 226.991 2.26577C225.382 3.08795 223.973 4.31644 222.794 5.92734C221.605 7.54302 220.655 9.55067 219.972 11.8881C219.289 14.2352 218.94 16.9646 218.94 20C218.94 23.0354 219.289 25.8222 219.972 28.1644C220.655 30.5067 221.605 32.5 222.789 34.1013C223.973 35.6931 225.387 36.9168 226.991 37.7342C228.596 38.5564 230.353 38.9723 232.211 38.9723C234.068 38.9723 235.634 38.6377 236.967 37.9828C238.308 37.3184 239.469 36.4866 240.414 35.5067C241.36 34.522 242.124 33.4178 242.673 32.2228C243.232 31.0182 243.661 29.8614 243.953 28.7763L244 28.5994H244.994Z" fill="#231F20"/>
+<path d="M327.733 0.549683V1.56307L327.508 1.57741C326.348 1.64911 325.407 1.72559 324.715 1.79729C324.046 1.86899 323.545 1.97894 323.23 2.1319C322.939 2.26574 322.752 2.45695 322.666 2.71029C322.566 2.99232 322.514 3.39863 322.514 3.91966V24.3929C322.514 29.4072 321.215 33.303 318.655 35.9751C316.096 38.6424 312.491 40 307.94 40C305.505 40 303.361 39.6319 301.565 38.9101C299.76 38.1835 298.261 37.1367 297.105 35.7982C295.954 34.4646 295.09 32.8059 294.531 30.8795C293.977 28.9627 293.7 26.783 293.7 24.3929V3.91966C293.7 3.39863 293.657 2.98754 293.571 2.69595C293.495 2.44739 293.333 2.26096 293.061 2.12712C292.76 1.97894 292.306 1.86421 291.714 1.79729C291.093 1.72559 290.248 1.64911 289.197 1.57741L288.978 1.56307V0.549683H303.566V1.56307L303.346 1.57741C302.296 1.64911 301.45 1.72559 300.83 1.79729C300.238 1.86421 299.779 1.97894 299.483 2.12712C299.211 2.26574 299.044 2.44739 298.972 2.69595C298.886 2.98276 298.843 3.39385 298.843 3.91966V25.3776C298.843 29.5459 299.813 32.7677 301.723 34.9665C303.623 37.151 306.402 38.26 309.974 38.26C313.546 38.26 316.296 37.0554 318.359 34.6893C320.436 32.3135 321.487 28.9197 321.487 24.6128V3.91966C321.487 3.40341 321.43 3.00188 321.31 2.71985C321.21 2.47607 320.952 2.28008 320.551 2.14146C320.097 1.98372 319.434 1.86899 318.574 1.79729C317.7 1.72559 316.502 1.64911 315.012 1.57741L314.787 1.56785V0.549683H327.733Z" fill="#231F20"/>
+</g>
+<defs>
+<clipPath id="clip0_10480_7448">
+<rect width="467" height="40" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+
+  </div>
+  <nav class="main-nav">
+    <a href="#">Home</a>
+    <a href="#">Properties for Sale</a>
+    <a href="#">Contact</a>
+    <a href="#" class="btn-val-nav">Value My Property</a>
+  </nav>
+</header>
+
+<!-- BACK -->
+<div class="back-bar"><a href="#">Back to Search Results</a></div>
+
+<!-- HERO IMAGES -->
+<div class="hero">
+  <div class="hero-pane left" style="padding:0;overflow:hidden;">
+    <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_NgElWgvYPSRX95da_hd.jpg" alt="Foxfield front elevation" style="width:100%;height:100%;object-fit:cover;display:block;">
+  </div>
+  <div class="hero-pane right" style="padding:0;overflow:hidden;">
+    <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_Mmxlmoi0Q0i9VcXs_hd.jpg" alt="Foxfield grounds" style="width:100%;height:100%;object-fit:cover;display:block;">
+    <div class="photo-count">⊞ / 65</div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="prop-tabs">
+  <a class="tab active" href="#description">Description</a>
+  <a class="tab" href="#">Printable Details</a>
+  <a class="tab" href="#">Gallery</a>
+  <a class="tab" href="#">Video</a>
+  <a class="tab" href="#">Floorplan</a>
+  <a class="tab" href="#map">Map</a>
+  <div class="tab-spacer"></div>
+  <div class="tab-actions">
+    <a class="tab-action" href="#">♡ Save Property</a>
+    <a class="tab-action" href="#">↗ Share</a>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="wrap" id="description">
+
+  <!-- LEFT COLUMN -->
+  <div class="left">
+
+    <!-- TITLE -->
+    <div class="title-block">
+      <h1>Detached House for sale with 7 bedrooms,<br>Rudry Road, Lisvane</h1>
+      <div class="price">Offers Over £8,000,000</div>
+      <div class="price-usd">0.7482 $10,692,328</div>
+      <div class="prop-addr">Rudry Road, Lisvane, CF14</div>
+      <div class="icons-row">
+        <div class="p-icon"><span class="p-icon-s">🛏</span> <strong>7</strong>&nbsp;Beds</div>
+        <div class="p-icon"><span class="p-icon-s">🛁</span> <strong>11</strong>&nbsp;Bathrooms</div>
+        <div class="p-icon"><span class="p-icon-s">🚪</span> <strong>5</strong>&nbsp;Receptions</div>
+      </div>
+      <div class="prop-ref">Ref: a103daa5-7cc2-4d1e-b90d-b3da97b2bea9</div>
+    </div>
+
+    <!-- INFO STRIP -->
+    <div class="info-strip">
+      <div class="info-item"><span class="info-lbl">Tenure</span> <span class="badge badge-gold">Freehold</span></div>
+      <div class="info-item"><span class="info-lbl">Floor</span> <span class="info-val">24,190 sq ft</span> <span class="badge badge-blue">Incl. Garage</span></div>
+      <div class="info-item"><span class="info-lbl">EPC</span> <span class="badge badge-green">Rating C</span></div>
+      <div class="info-item"><span class="info-lbl">Council Tax</span> <span class="info-val">Band I</span></div>
+      <div class="info-item"><span class="badge badge-avail">Available</span></div>
+      <div class="info-item"><span class="info-lbl">Built</span> <span class="info-val">1999</span> <span class="badge badge-blue">Resale</span></div>
+      <div class="info-item"><span class="info-lbl">Grounds</span> <span class="info-val">c. 24 Acres</span></div>
+    </div>
+
+    <!-- KEY FEATURES -->
+    <div class="sec">
+      <div class="sec-title">Key Property Features</div>
+      <ul class="feat-list">
+        <li>Seven bedrooms each with a dedicated en-suite bathroom</li>
+        <li>Two dedicated home offices supporting modern work-from-home lifestyles</li>
+        <li>24 acres of private gated grounds with sweeping driveway</li>
+        <li>Three picturesque ponds and mature landscaped gardens</li>
+        <li>Private all-weather tennis court</li>
+        <li>Large drawing room and formal dining room with double-door connection</li>
+        <li>Orangery and spacious kitchen with informal breakfast area</li>
+        <li>Large recreational space with bar and seating area on upper floor</li>
+        <li>Yoga studio / flexible wellness and leisure space</li>
+        <li>Undercroft valet-style car garage for multiple vehicles</li>
+        <li>Passenger lift servicing all four floors</li>
+        <li>Prime Lisvane location close to excellent schools and city transport links</li>
+      </ul>
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div class="sec">
+      <div class="sec-title">Property Description</div>
+      <div class="desc">
+        <p>Fine &amp; Country Cardiff is proud to present Foxfield, an extraordinary gated residence set within approximately 24 acres of private grounds in the highly sought-after suburb of Lisvane. Built in 1999 with exceptional craftsmanship and attention to detail, the property combines timeless architectural elegance with modern comforts, creating an impressive family home designed for both luxurious living and entertaining.</p>
+        <p>The grand entrance hall immediately showcases the home's scale and character, featuring a handcrafted American white oak staircase spanning three floors and enhanced by natural light from above. The main reception areas include a large drawing room that connects to the formal dining room through double doors, creating an ideal setting for hosting drinks receptions, celebrations, and formal dinners.</p>
+        <p>At the heart of the home is the spacious kitchen and breakfast room, which flows into an informal sitting area designed for everyday family life. The property offers seven generously sized bedrooms, each with its own en-suite bathroom, alongside two dedicated home offices that support modern work-from-home lifestyles.</p>
+        <p>The upper level of the house provides a large recreational space complete with a bar and seating area, making it an ideal venue for entertaining guests. A separate room on this floor is currently used as a yoga studio, providing additional flexibility for wellness, leisure, or hobbies.</p>
+        <p>Outside, Foxfield continues to impress with its expansive grounds featuring three picturesque ponds, manicured lawns, mature landscaping, and a private tennis court. A sweeping driveway leads to an undercroft valet-style garage that provides secure storage for multiple vehicles. The estate's extensive acreage also offers potential for equestrian use, outdoor recreation, or simply enjoying the privacy and tranquillity of the surrounding natural landscape.</p>
+      </div>
+    </div>
+
+
+
+    <!-- PROPERTY LAYOUT -->
+    <div class="sec">
+      <div class="sec-title">Property Layout</div>
+      <div class="floor-grid">
+        <div class="f-card">
+          <div class="f-head">Basement</div>
+          <div class="f-body">
+            <div class="f-room">Large Undercroft Valet Garage</div>
+            <div class="f-room">Cellar / Storage Areas</div>
+            <div class="f-room">Plant / Utility Areas</div>
+          </div>
+        </div>
+        <div class="f-card">
+          <div class="f-head">Ground Floor</div>
+          <div class="f-body">
+            <div class="f-room">Grand Entrance Hall</div>
+            <div class="f-room">Drawing Room</div>
+            <div class="f-room">Dining Room</div>
+            <div class="f-room">Kitchen &amp; Breakfast Room</div>
+            <div class="f-room">Informal Sitting Area</div>
+            <div class="f-room">Orangery</div>
+            <div class="f-room">Home Office × 2</div>
+            <div class="f-room">Additional Reception Areas</div>
+            <div class="f-room">Lift Access</div>
+          </div>
+        </div>
+        <div class="f-card">
+          <div class="f-head">First Floor</div>
+          <div class="f-body">
+            <div class="f-room">Landing</div>
+            <div class="f-room">Multiple Bedroom Suites</div>
+            <div class="f-room">En-suite Bathrooms</div>
+          </div>
+        </div>
+        <div class="f-card">
+          <div class="f-head">Second Floor</div>
+          <div class="f-body">
+            <div class="f-room">Large Recreational Space</div>
+            <div class="f-room">Bar &amp; Seating Area</div>
+            <div class="f-room">Yoga Studio / Studio Room</div>
+            <div class="f-room">Additional Bedroom Suites</div>
+            <div class="f-room">En-suite Bathrooms</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAP -->
+    <div class="sec" id="map">
+      <div class="sec-title">Location</div>
+      <div class="map-box">
+        <div class="map-vis">
+          <div class="map-pin">📍</div>
+          <div class="map-name">Rudry Road, Lisvane</div>
+          <div class="map-sub">Cardiff, CF14</div>
+        </div>
+        <div class="map-tabs-row">
+          <div class="m-tab active">Transport</div>
+          <div class="m-tab">Schools</div>
+          <div class="m-tab">Food &amp; Drink</div>
+          <div class="m-tab">Amenities</div>
+          <div class="m-tab">Broadband</div>
+          <div class="m-tab">Mobile</div>
+        </div>
+      </div>
+      <div class="nearby">
+        <div class="nb-item"><div class="nb-dot"></div><div><div class="nb-name">Lisvane &amp; Thornhill Station</div><div class="nb-dist">National Rail</div></div></div>
+        <div class="nb-item"><div class="nb-dot"></div><div><div class="nb-name">Corpus Christi High School</div><div class="nb-dist">Secondary School</div></div></div>
+        <div class="nb-item"><div class="nb-dot g"></div><div><div class="nb-name">Llanishen</div><div class="nb-dist">Suburban area · Cardiff</div></div></div>
+        <div class="nb-item"><div class="nb-dot gr"></div><div><div class="nb-name">Caerphilly</div><div class="nb-dist">Town · 3.5 mi approx.</div></div></div>
+      </div>
+    </div>
+
+    <!-- LOCATION INFO -->
+    <div class="sec">
+      <div class="sec-title">Location Information</div>
+      <div class="desc">
+        <p>Lisvane is widely regarded as one of the most prestigious residential areas in Cardiff, known for its spacious homes, green surroundings, and strong reputation for high-quality schooling. Properties in this area are often sought after by families and professionals looking for privacy and space while still benefiting from access to Cardiff's business, cultural, and transport hubs. Large estates with extensive land are particularly rare, making properties such as Foxfield highly distinctive within the local market.</p>
+      </div>
+      <div class="loc-cats">
+        <div class="loc-cat">
+          <div class="loc-cat-title">🚂 Transport</div>
+          <div class="loc-cat-body"><ul>
+            <li>Lisvane and Thornhill railway station (1.26 miles)</li>
+            <li>Llanishen railway station (1.74 miles)</li>
+            <li>Caerphilly railway station (2.73 miles) — National Rail connections</li>
+          </ul></div>
+        </div>
+        <div class="loc-cat">
+          <div class="loc-cat-title">🎓 Schools</div>
+          <div class="loc-cat-body"><ul>
+            <li>Llysfaen Primary School (1.05 miles)</li>
+            <li>Rhydri Primary School (1.50 miles)</li>
+            <li>Corpus Christi Catholic High School (1.43 miles)</li>
+          </ul></div>
+        </div>
+        <div class="loc-cat">
+          <div class="loc-cat-title">🍽 Food &amp; Drink</div>
+          <div class="loc-cat-body"><ul>
+            <li>Ty Mawr Arms (0.81 miles)</li>
+            <li>The Black Griffin Inn (1.02 miles)</li>
+            <li>Cafe 19Thirteen (0.96 miles)</li>
+          </ul></div>
+        </div>
+        <div class="loc-cat">
+          <div class="loc-cat-title">🏪 Amenities</div>
+          <div class="loc-cat-body"><ul>
+            <li>Lisvane Stores (1.01 miles)</li>
+            <li>St Denys Church</li>
+            <li>Independent General Practice Cardiff (approx. 1.5 miles)</li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MARKET INSIGHTS -->
+    <div class="sec">
+      <div class="sec-title">Property Market Insights</div>
+      <div class="market-row">
+        <div class="m-card">
+          <h4>Typical Buyers</h4>
+          <div class="buyer-row">High-net-worth families seeking luxury private estates</div>
+          <div class="buyer-row">Buyers seeking gated residences with extensive grounds</div>
+          <div class="buyer-row">Buyers wanting countryside living close to Cardiff</div>
+          <div class="demand-pill"><div class="d-dot"></div><span class="d-text">High Local Demand</span></div>
+        </div>
+        <div class="m-card">
+          <h4>Market Overview</h4>
+          <div class="desc">
+            <p style="font-size:13px;margin-bottom:0;">Lisvane commands a premium within the Cardiff market, attracting buyers who value space, privacy, and prestige. The suburb's combination of outstanding schools, green space, and proximity to the city centre creates sustained demand for quality homes. Large private estates of Foxfield's calibre are exceptionally rare, positioning this property as a genuinely unique opportunity within the Welsh luxury market.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQs -->
+    <div class="sec">
+      <div class="sec-title">Frequently Asked Questions</div>
+      <div class="faq-row"><div class="fq-trigger" onclick="toggleFaq(this)"><div class="fq-num">01</div><div class="fq-q">What type of buyer would this property suit best?</div><span class="fq-chevron">∨</span></div><div class="fq-a">This property would suit buyers seeking a luxury private estate with extensive grounds and high-end living space close to Cardiff.</div></div>
+      <div class="faq-row"><div class="fq-trigger" onclick="toggleFaq(this)"><div class="fq-num">02</div><div class="fq-q">How large is the property estate?</div><span class="fq-chevron">∨</span></div><div class="fq-a">The property sits within approximately 24 acres of private gated grounds.</div></div>
+      <div class="faq-row"><div class="fq-trigger" onclick="toggleFaq(this)"><div class="fq-num">03</div><div class="fq-q">How many bedrooms does the property have?</div><span class="fq-chevron">∨</span></div><div class="fq-a">The house includes seven bedrooms, each with its own en-suite bathroom.</div></div>
+      <div class="faq-row"><div class="fq-trigger" onclick="toggleFaq(this)"><div class="fq-num">04</div><div class="fq-q">Does the property have space for working from home?</div><span class="fq-chevron">∨</span></div><div class="fq-a">Yes, the property includes two dedicated home offices on the ground floor.</div></div>
+      <div class="faq-row"><div class="fq-trigger" onclick="toggleFaq(this)"><div class="fq-num">05</div><div class="fq-q">Are there facilities for recreation or entertaining?</div><span class="fq-chevron">∨</span></div><div class="fq-a">Yes, the house features large reception rooms, a recreational space with a bar, a yoga studio, and a private tennis court.</div></div>
+      <div class="faq-row"><div class="fq-trigger" onclick="toggleFaq(this)"><div class="fq-num">06</div><div class="fq-q">Is parking available on the property?</div><span class="fq-chevron">∨</span></div><div class="fq-a">Yes, the property includes a large undercroft valet-style garage with space for multiple vehicles.</div></div>
+      <div class="faq-row"><div class="fq-trigger" onclick="toggleFaq(this)"><div class="fq-num">07</div><div class="fq-q">What outdoor features does the estate include?</div><span class="fq-chevron">∨</span></div><div class="fq-a">The grounds include three ponds, landscaped gardens, manicured lawns, and a private tennis court, with equestrian potential.</div></div>
+      <div class="faq-row"><div class="fq-trigger" onclick="toggleFaq(this)"><div class="fq-num">08</div><div class="fq-q">How well connected is the location?</div><span class="fq-chevron">∨</span></div><div class="fq-a">Lisvane provides convenient access to Cardiff city centre and strong links to surrounding areas via road and rail.</div></div>
+      <div class="faq-row"><div class="fq-trigger" onclick="toggleFaq(this)"><div class="fq-num">09</div><div class="fq-q">Are there good schools nearby?</div><span class="fq-chevron">∨</span></div><div class="fq-a">Yes, the Lisvane area is well-regarded for its excellent local schools, a key attraction for families.</div></div>
+      <div class="faq-row"><div class="fq-trigger" onclick="toggleFaq(this)"><div class="fq-num">10</div><div class="fq-q">Could the land support outdoor or equestrian activities?</div><span class="fq-chevron">∨</span></div><div class="fq-a">The expansive grounds provide excellent potential for equestrian pursuits, leisure, and outdoor recreation.</div></div>
+    </div>
+
+  </div><!-- /left -->
+
+  <!-- RIGHT SIDEBAR -->
+  <div class="right">
+
+    <div class="agent-card">
+      <div class="ac-head">
+        <p>Fine &amp; Country Cardiff and Newport</p>
+        <span>Sophia House, 28 Cathedral Road, Cardiff</span>
+      </div>
+      <div class="ac-body">
+        <a href="#" class="btn-book">📅 &nbsp;Book a Viewing</a>
+        <a href="tel:+442921690690" class="btn-call">📞 &nbsp;Call +44 29 2169 0690</a>
+        <a href="#" class="btn-cb">↩ &nbsp;Request a Call Back</a>
+      </div>
+    </div>
+
+    <div class="calc-stub" id="calc-mortgage">
+      <div class="cs-head" onclick="toggleCalc('calc-mortgage')"><span>≡ &nbsp;Mortgage Calculator</span><span class="cs-icon">∨</span></div>
+      <div class="cs-body">
+        <div class="cs-field"><label>Property Price (£)</label><input type="number" id="mc-price" value="8000000"></div>
+        <div class="cs-field"><label>Deposit (£)</label><input type="number" id="mc-deposit" value="1600000"></div>
+        <div class="cs-field"><label>Interest Rate (%)</label><input type="number" id="mc-rate" value="4.5" step="0.1"></div>
+        <div class="cs-field"><label>Term (Years)</label><input type="number" id="mc-term" value="25"></div>
+        <button class="cs-btn" onclick="calcMortgage()">Calculate</button>
+        <div class="cs-result" id="mc-result"></div>
+      </div>
+    </div>
+    <div class="calc-stub" id="calc-stamp">
+      <div class="cs-head" onclick="toggleCalc('calc-stamp')"><span>≡ &nbsp;Stamp Duty Calculator</span><span class="cs-icon">∨</span></div>
+      <div class="cs-body">
+        <div class="cs-field"><label>Property Price (£)</label><input type="number" id="sd-price" value="8000000"></div>
+        <div class="cs-field"><label>Buyer Type</label>
+          <select id="sd-type">
+            <option value="standard">Standard Purchase</option>
+            <option value="additional">Additional Property</option>
+            <option value="ftb">First Time Buyer</option>
+          </select>
+        </div>
+        <button class="cs-btn" onclick="calcStamp()">Calculate</button>
+        <div class="cs-result" id="sd-result"></div>
+      </div>
+    </div>
+
+  </div><!-- /right -->
+
+</div><!-- /wrap -->
+
+<!-- VALUATION BAND -->
+<div class="val-band">
+  <p>Has your property's value increased? To find out how much your property is worth</p>
+  <a href="#" class="btn-val">Book a Property Valuation</a>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="foot-grid">
+    <div class="foot-col">
+      <h4>Fine &amp; Country Cardiff and Newport</h4>
+      <address>Sophia House<br>28 Cathedral Road<br>Pontcanna<br>Cardiff, CF11 9LJ<br>South Glamorgan, GB</address>
+    </div>
+    <div class="foot-col">
+      <h4>Contact Details</h4>
+      <a href="tel:+442921690690" class="hi">Sales: +44 29 2169 0690</a>
+      <a href="#" class="hi"><span class="__cf_email__" data-cfemail="492a283b2d202f2f092f20272c28272d2a263c273d3b30672a2624">[email&#160;protected]</span></a>
+    </div>
+    <div class="foot-col">
+      <h4>Browse Properties</h4>
+      <a href="#">Property for sale in Cardiff</a>
+      <a href="#">Flats for sale in Cardiff</a>
+      <a href="#">Houses for sale in Cardiff</a>
+      <a href="#">4 bedroom property for sale</a>
+      <a href="#">5 bedroom property for sale</a>
+    </div>
+    <div class="foot-col">
+      <h4>Fine &amp; Country UK</h4>
+      <a href="#">Why Fine &amp; Country</a>
+      <a href="#">Value My Property</a>
+      <a href="#">Our Offices</a>
+      <a href="#">Blog &amp; Guides</a>
+      <a href="#">Join Us</a>
+    </div>
+  </div>
+  <div class="foot-btm">
+    <p>© Fine &amp; Country 2026. All rights reserved. GPEA Limited.</p>
+    <div class="foot-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#"ookie Policy</a>
+      <a href="#">Members Login</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(trigger) {
+  const row = trigger.parentElement;
+  const isOpen = row.classList.contains('open');
+  document.querySelectorAll('.faq-row.open').forEach(r => r.classList.remove('open'));
+  if (!isOpen) row.classList.add('open');
+}
+
+function toggleCalc(id) {
+  const el = document.getElementById(id);
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.calc-stub.open').forEach(c => c.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
+
+function calcMortgage() {
+  const price = parseFloat(document.getElementById('mc-price').value) || 0;
+  const deposit = parseFloat(document.getElementById('mc-deposit').value) || 0;
+  const rate = parseFloat(document.getElementById('mc-rate').value) / 100 / 12;
+  const term = parseFloat(document.getElementById('mc-term').value) * 12;
+  const loan = price - deposit;
+  if (loan <= 0 || rate <= 0 || term <= 0) return;
+  const monthly = (loan * rate * Math.pow(1 + rate, term)) / (Math.pow(1 + rate, term) - 1);
+  const el = document.getElementById('mc-result');
+  el.style.display = 'block';
+  el.textContent = '£' + Math.round(monthly).toLocaleString() + ' / month';
+}
+
+function calcStamp() {
+  const price = parseFloat(document.getElementById('sd-price').value) || 0;
+  const type = document.getElementById('sd-type').value;
+  let tax = 0;
+  const bands = type === 'additional'
+    ? [[0,250000,0.05],[250000,925000,0.10],[925000,1500000,0.15],[1500000,Infinity,0.17]]
+    : [[0,250000,0],[250000,925000,0.05],[925000,1500000,0.10],[1500000,Infinity,0.12]];
+  bands.forEach(([min, max, rate]) => {
+    if (price > min) tax += (Math.min(price, max) - min) * rate;
+  });
+  const el = document.getElementById('sd-result');
+  el.style.display = 'block';
+  el.textContent = 'Stamp Duty: £' + Math.round(tax).toLocaleString();
+}
+</script>
+</body>
+</html>

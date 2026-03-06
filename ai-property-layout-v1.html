@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,7 +89,7 @@
   /* Section */
   .sec { padding: 26px 0; border-bottom: 1px solid var(--border); }
   .sec:last-child { border-bottom: none; }
-  .sec-title { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; }
+  .sec-title { font-size: 16px; font-weight: 700; letter-spacing: 0.3px; text-transform: none; color: var(--text); margin-bottom: 16px; font-family: 'Lato', sans-serif; }
 
   /* Snapshot grid */
   .snap-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; border: 1px solid var(--border); }
@@ -109,6 +110,19 @@
   .feat-list li { font-size: 13px; color: var(--text-light); padding: 7px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 10px; line-height: 1.4; }
   .feat-list li:last-child { border-bottom: none; }
   .feat-list li::before { content: ''; width: 5px; height: 5px; background: var(--gold); border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+
+  /* Gallery */
+  .gallery-sec { padding: 16px 0; border-bottom: 1px solid var(--border); }
+  .gallery-grid { display: grid; grid-template-columns: 1fr 280px; gap: 8px; }
+  .gallery-main { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .gallery-main img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; cursor: pointer; background: var(--bg-cream); }
+  .gallery-main img:hover { opacity: 0.88; }
+  .gallery-more { aspect-ratio: 4/3; background: var(--bg-cream); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 600; color: var(--text-light); cursor: pointer; }
+  .gallery-more:hover { background: var(--border); }
+  .gallery-floorplan { position: relative; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .gallery-floorplan img { width: 100%; height: 100%; object-fit: contain; display: block; padding: 8px; }
+  .floorplan-zoom { position: absolute; bottom: 12px; left: 12px; width: 36px; height: 36px; background: rgba(0,0,0,0.55); color: #fff; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; }
+  .floorplan-zoom:hover { background: rgba(0,0,0,0.75); }
 
   /* Info strip */
   .info-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 0; padding: 13px 0; border-bottom: 1px solid var(--border); border-top: 1px solid var(--border); margin-top: 14px; row-gap: 10px; }
@@ -591,7 +605,10 @@
     <!-- TITLE -->
     <div class="title-block">
       <h1>Detached House for sale with 7 bedrooms,<br>Rudry Road, Lisvane</h1>
-      <div class="price">Offers Over £8,000,000</div>
+      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;">
+        <div class="price">Offers Over £8,000,000</div>
+        <div class="prop-ref">Ref: a103daa5-7cc2-4d1e-b90d-b3da97b2bea9</div>
+      </div>
       <div class="price-usd">0.7482 $10,692,328</div>
       <div class="prop-addr">Rudry Road, Lisvane, CF14</div>
       <div class="icons-row">
@@ -599,7 +616,6 @@
         <div class="p-icon"><span class="p-icon-s">🛁</span> <strong>11</strong>&nbsp;Bathrooms</div>
         <div class="p-icon"><span class="p-icon-s">🚪</span> <strong>5</strong>&nbsp;Receptions</div>
       </div>
-      <div class="prop-ref">Ref: a103daa5-7cc2-4d1e-b90d-b3da97b2bea9</div>
     </div>
 
     <!-- INFO STRIP -->
@@ -610,12 +626,36 @@
       <div class="info-item"><span class="info-lbl">Council Tax</span> <span class="info-val">Band I</span></div>
       <div class="info-item"><span class="badge badge-avail">Available</span></div>
       <div class="info-item"><span class="info-lbl">Built</span> <span class="info-val">1999</span> <span class="badge badge-blue">Resale</span></div>
-      <div class="info-item"><span class="info-lbl">Grounds</span> <span class="info-val">c. 24 Acres</span></div>
+      <div class="info-item"><span class="info-lbl">Grounds</span> <span class="info-val">24 Acres</span></div>
+    </div>
+
+    <!-- GALLERY GRID -->
+    <div class="gallery-sec">
+      <div class="gallery-grid">
+        <div class="gallery-main">
+          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_NgElWgvYPSRX95da_hd.jpg" alt="Foxfield exterior">
+          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_Mmxlmoi0Q0i9VcXs_hd.jpg" alt="Aerial view">
+          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_KyQ3DjBzZEqOVjHS_hd.jpg" alt="Interior">
+          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_1nbY0sdYTA5ZkbkH_larger.jpg" alt="Kitchen">
+          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_Tgjx6YtFxI8sKuVI_larger.jpg" alt="Reception">
+          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_7dDocPLP36xRCIqF_hd.jpg" alt="Room">
+          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_nbY0sdYTA5ZkbkH_larger.jpg" alt="Dining">
+          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_gjx6YtFxI8sKuVI_larger.jpg" alt="Lounge">
+          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_hY0sdYTA5ZkbkH_larger.jpg" alt="Garden">
+          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_jx6YtFxI8sKuVI_larger.jpg" alt="Grounds">
+          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_Y0sdYTA5ZkbkH_larger.jpg" alt="Bedroom">
+          <div class="gallery-more">+ 54</div>
+        </div>
+        <div class="gallery-floorplan">
+          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/FLP_7dDocPLP36xRCIqF_hd.jpg" alt="Floor Plan">
+          <div class="floorplan-zoom">&#x2b;</div>
+        </div>
+      </div>
     </div>
 
     <!-- KEY FEATURES -->
     <div class="sec">
-      <div class="sec-title">Key Property Features</div>
+      <h2 class="sec-title">Key Property Features</h2>
       <ul class="feat-list">
         <li>Seven bedrooms each with a dedicated en-suite bathroom</li>
         <li>Two dedicated home offices supporting modern work-from-home lifestyles</li>
@@ -634,7 +674,7 @@
 
     <!-- DESCRIPTION -->
     <div class="sec">
-      <div class="sec-title">Property Description</div>
+      <h2 class="sec-title">Property Description</h2>
       <div class="desc">
         <p>Fine &amp; Country Cardiff is proud to present Foxfield, an extraordinary gated residence set within approximately 24 acres of private grounds in the highly sought-after suburb of Lisvane. Built in 1999 with exceptional craftsmanship and attention to detail, the property combines timeless architectural elegance with modern comforts, creating an impressive family home designed for both luxurious living and entertaining.</p>
         <p>The grand entrance hall immediately showcases the home's scale and character, featuring a handcrafted American white oak staircase spanning three floors and enhanced by natural light from above. The main reception areas include a large drawing room that connects to the formal dining room through double doors, creating an ideal setting for hosting drinks receptions, celebrations, and formal dinners.</p>
@@ -648,7 +688,7 @@
 
     <!-- PROPERTY LAYOUT -->
     <div class="sec">
-      <div class="sec-title">Property Layout</div>
+      <h2 class="sec-title">Property Layout</h2>
       <div class="floor-grid">
         <div class="f-card">
           <div class="f-head">Basement</div>
@@ -695,7 +735,7 @@
 
     <!-- MAP -->
     <div class="sec" id="map">
-      <div class="sec-title">Location</div>
+      <h2 class="sec-title">Location</h2>
       <div class="map-box">
         <div class="map-vis">
           <div class="map-pin">📍</div>
@@ -721,7 +761,7 @@
 
     <!-- LOCATION INFO -->
     <div class="sec">
-      <div class="sec-title">Location Information</div>
+      <h2 class="sec-title">Location Information</h2>
       <div class="desc">
         <p>Lisvane is widely regarded as one of the most prestigious residential areas in Cardiff, known for its spacious homes, green surroundings, and strong reputation for high-quality schooling. Properties in this area are often sought after by families and professionals looking for privacy and space while still benefiting from access to Cardiff's business, cultural, and transport hubs. Large estates with extensive land are particularly rare, making properties such as Foxfield highly distinctive within the local market.</p>
       </div>
@@ -763,7 +803,7 @@
 
     <!-- MARKET INSIGHTS -->
     <div class="sec">
-      <div class="sec-title">Property Market Insights</div>
+      <h2 class="sec-title">Property Market Insights</h2>
       <div class="market-row">
         <div class="m-card">
           <h4>Typical Buyers</h4>
@@ -783,7 +823,7 @@
 
     <!-- FAQs -->
     <div class="sec">
-      <div class="sec-title">Frequently Asked Questions</div>
+      <h2 class="sec-title">Frequently Asked Questions</h2>
       <div class="faq-row"><div class="fq-trigger" onclick="toggleFaq(this)"><div class="fq-num">01</div><div class="fq-q">What type of buyer would this property suit best?</div><span class="fq-chevron">∨</span></div><div class="fq-a">This property would suit buyers seeking a luxury private estate with extensive grounds and high-end living space close to Cardiff.</div></div>
       <div class="faq-row"><div class="fq-trigger" onclick="toggleFaq(this)"><div class="fq-num">02</div><div class="fq-q">How large is the property estate?</div><span class="fq-chevron">∨</span></div><div class="fq-a">The property sits within approximately 24 acres of private gated grounds.</div></div>
       <div class="faq-row"><div class="fq-trigger" onclick="toggleFaq(this)"><div class="fq-num">03</div><div class="fq-q">How many bedrooms does the property have?</div><span class="fq-chevron">∨</span></div><div class="fq-a">The house includes seven bedrooms, each with its own en-suite bathroom.</div></div>

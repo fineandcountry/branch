@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Foxfield | Rudry Road, Lisvane | Fine & Country</title>
+<title>Fine & Country</title>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -113,14 +113,14 @@
   /* Gallery */
   .gallery-sec { padding: 16px 0; border-bottom: 1px solid var(--border); }
   .gallery-grid { display: grid; grid-template-columns: 1fr 280px; gap: 8px; }
-  .gallery-main { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
-  .gallery-main img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; cursor: pointer; background: var(--bg-cream); }
+  .gallery-main { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; align-content: start; }
+  .gallery-main img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; cursor: pointer; }
   .gallery-main img:hover { opacity: 0.88; }
-  .gallery-more { aspect-ratio: 4/3; background: var(--bg-cream); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 600; color: var(--text-light); cursor: pointer; }
+  .gallery-more { aspect-ratio: 4/3; background: var(--bg-cream); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 600; color: var(--text-light); cursor: pointer; }
   .gallery-more:hover { background: var(--border); }
-  .gallery-floorplan { position: relative; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .gallery-floorplan { position: relative; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; min-height: 180px; }
   .gallery-floorplan img { width: 100%; height: 100%; object-fit: contain; display: block; padding: 8px; }
-  .floorplan-zoom { position: absolute; bottom: 12px; left: 12px; width: 36px; height: 36px; background: rgba(0,0,0,0.55); color: #fff; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; }
+  .floorplan-zoom { position: absolute; bottom: 12px; left: 12px; width: 34px; height: 34px; background: rgba(0,0,0,0.55); color: #fff; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 300; cursor: pointer; }
   .floorplan-zoom:hover { background: rgba(0,0,0,0.75); }
 
   /* Info strip */
@@ -626,30 +626,6 @@
       <div class="info-item"><span class="badge badge-avail">Available</span></div>
       <div class="info-item"><span class="info-lbl">Built</span> <span class="info-val">1999</span> <span class="badge badge-blue">Resale</span></div>
       <div class="info-item"><span class="info-lbl">Grounds</span> <span class="info-val">24 Acres</span></div>
-    </div>
-
-    <!-- GALLERY GRID -->
-    <div class="gallery-sec">
-      <div class="gallery-grid">
-        <div class="gallery-main">
-          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_NgElWgvYPSRX95da_hd.jpg" alt="Foxfield exterior">
-          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_Mmxlmoi0Q0i9VcXs_hd.jpg" alt="Aerial view">
-          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_KyQ3DjBzZEqOVjHS_hd.jpg" alt="Interior">
-          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_1nbY0sdYTA5ZkbkH_larger.jpg" alt="Kitchen">
-          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_Tgjx6YtFxI8sKuVI_larger.jpg" alt="Reception">
-          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_7dDocPLP36xRCIqF_hd.jpg" alt="Room">
-          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_nbY0sdYTA5ZkbkH_larger.jpg" alt="Dining">
-          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_gjx6YtFxI8sKuVI_larger.jpg" alt="Lounge">
-          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_hY0sdYTA5ZkbkH_larger.jpg" alt="Garden">
-          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_jx6YtFxI8sKuVI_larger.jpg" alt="Grounds">
-          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/IMG_Y0sdYTA5ZkbkH_larger.jpg" alt="Bedroom">
-          <div class="gallery-more">+ 54</div>
-        </div>
-        <div class="gallery-floorplan">
-          <img src="https://cdn.members.nurtur.tech/properties/7/799/5766/4581314/FLP_7dDocPLP36xRCIqF_hd.jpg" alt="Floor Plan">
-          <div class="floorplan-zoom">&#x2b;</div>
-        </div>
-      </div>
     </div>
 
     <!-- KEY FEATURES -->
